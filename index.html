@@ -520,19 +520,31 @@
         }
         @keyframes scanLine { 0% { left: 10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 90%; opacity: 0; } }
 
-        /* --- FOOTER (Restored Original Padding) --- */
+        /* --- FOOTER (Restored Original Padding & Added Animation Canvas) --- */
         footer {
             background: linear-gradient(to top, #000, #080808);
             padding: 4rem 10% 2rem; /* Original Padding */
             overflow: hidden;
+            position: relative;
         }
         
+        #footer-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 4rem;
             margin-bottom: 3rem;
-            position: relative; z-index: 10;
+            position: relative; z-index: 2; /* Increased Z-index to sit above canvas */
         }
         
         .footer-about p {
@@ -607,6 +619,7 @@
             font-size: 0.85rem;
             display: flex; justify-content: space-between;
             font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
+            position: relative; z-index: 2;
         }
 
         /* --- RESPONSIVE DESIGN --- */
@@ -868,10 +881,10 @@
                 <h4>AI/ML</h4>
                 <ul class="skill-list">
                     <li><span>TensorFlow</span> <span><i class="fas fa-brain"></i></span></li>
-                    <li><span>Keras</span></li>
-                    <li><span>YOLO</span></li>
-                    <li><span>OpenCV</span></li>
-                    <li><span>MediaPipe</span></li>
+                    <li><span>Keras</span> <span><i class="fas fa-layer-group"></i></span></li>
+                    <li><span>YOLO</span> <span><i class="fas fa-crosshairs"></i></span></li>
+                    <li><span>OpenCV</span> <span><i class="fas fa-camera"></i></span></li>
+                    <li><span>MediaPipe</span> <span><i class="fas fa-hand-sparkles"></i></span></li>
                 </ul>
             </div>
             
@@ -881,18 +894,18 @@
                     <li><span>Flask</span> <span><i class="fas fa-server"></i></span></li>
                     <li><span>GitHub</span> <span><i class="fab fa-github"></i></span></li>
                     <li><span>Kaggle</span> <span><i class="fab fa-kaggle"></i></span></li>
-                    <li><span>Roboflow</span></li>
+                    <li><span>Roboflow</span> <span><i class="fas fa-box-open"></i></span></li>
                 </ul>
             </div>
 
             <div class="skill-category">
                 <h4>Core Concepts</h4>
                 <ul class="skill-list">
-                    <li><span>Data Science</span></li>
-                    <li><span>Machine Learning</span></li>
-                    <li><span>Deep Learning</span></li>
-                    <li><span>Computer Vision</span></li>
-                    <li><span>DSA</span></li>
+                    <li><span>Data Science</span> <span><i class="fas fa-chart-bar"></i></span></li>
+                    <li><span>Machine Learning</span> <span><i class="fas fa-robot"></i></span></li>
+                    <li><span>Deep Learning</span> <span><i class="fas fa-network-wired"></i></span></li>
+                    <li><span>Computer Vision</span> <span><i class="fas fa-eye"></i></span></li>
+                    <li><span>DSA</span> <span><i class="fas fa-project-diagram"></i></span></li>
                 </ul>
             </div>
         </div>
@@ -995,6 +1008,8 @@
     </div>
 
     <footer id="contact">
+        <canvas id="footer-rain"></canvas>
+
         <div class="footer-grid">
             <div class="footer-about">
                 <div class="nav-logo">JEET BHARDWAJ</div>
@@ -1223,6 +1238,60 @@
         }
 
         animate(0);
+
+        // --- 5. NEW FOOTER MATRIX ANIMATION ---
+        (function() {
+            const footerCanvas = document.getElementById('footer-rain');
+            const fCtx = footerCanvas.getContext('2d');
+            let fWidth, fHeight;
+
+            function resizeFooter() {
+                const footer = document.querySelector('footer');
+                fWidth = footer.offsetWidth;
+                fHeight = footer.offsetHeight;
+                footerCanvas.width = fWidth;
+                footerCanvas.height = fHeight;
+            }
+            resizeFooter();
+            window.addEventListener('resize', resizeFooter);
+
+            const fontSize = 14;
+            let columns = Math.floor(fWidth / fontSize);
+            const drops = [];
+
+            function initDrops() {
+                columns = Math.floor(fWidth / fontSize);
+                drops.length = 0;
+                for(let i = 0; i < columns; i++) {
+                    drops[i] = Math.random() * -100; // Start at random heights above
+                }
+            }
+            initDrops();
+            window.addEventListener('resize', initDrops);
+
+            const chars = "010101010101XYZABC"; // Binary + Chars
+
+            function drawFooterMatrix() {
+                fCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                fCtx.fillRect(0, 0, fWidth, fHeight);
+
+                fCtx.fillStyle = '#ff0000'; // Neon Red
+                fCtx.font = fontSize + 'px monospace';
+
+                for(let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    fCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if(drops[i] * fontSize > fHeight && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+                requestAnimationFrame(drawFooterMatrix);
+            }
+            drawFooterMatrix();
+        })();
+
     </script>
 </body>
 </html>
