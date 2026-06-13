@@ -182,7 +182,7 @@
         .cta-btn:hover { background: transparent; color: var(--text-primary); }
 
         /* =========================================
-           4. HERO SECTION & HOLOGRAPHIC CARD
+           4. HERO SECTION, HOLOGRAPHIC CARD & SCROLL ARROW
            ========================================= */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
@@ -249,6 +249,39 @@
         .drag-hint { margin-top: 40px; text-align: center; font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 2px; font-family: monospace; animation: pulse 2s infinite; pointer-events: none; }
 
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        /* SCROLL DOWN ARROW */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 20;
+            animation: bounce 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
 
         /* =========================================
            5. SECTION LAYOUTS & STRUCTURE
@@ -330,7 +363,8 @@
                 flex-direction: column; 
                 justify-content: center; 
                 align-items: center;
-                padding-top: 140px; 
+                padding-top: 100px; 
+                padding-bottom: 120px; /* Added extra padding to prevent overlapping with the arrow */
                 text-align: center; 
             }
             .hero-content { 
@@ -423,6 +457,11 @@
                     </div>
                     <div class="drag-hint">DRAG TO ROTATE</div>
                 </div>
+
+                <div class="scroll-indicator" id="scroll-arrow" aria-label="Scroll Down">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
             </section>
 
             <section id="projects" class="content-section">
@@ -754,7 +793,15 @@
             else navbar.classList.remove('scrolled');
         });
 
-        // --- 4. 3D ICOSAHEDRON BACKGROUND ---
+        // --- 4. SCROLL DOWN ARROW LOGIC ---
+        const scrollArrow = document.getElementById('scroll-arrow');
+        if(scrollArrow) {
+            scrollArrow.addEventListener('click', () => {
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // --- 5. 3D ICOSAHEDRON BACKGROUND ---
         const container = document.getElementById('webgl-container');
         const scene = new THREE.Scene();
         
