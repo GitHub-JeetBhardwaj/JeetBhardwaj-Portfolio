@@ -1,684 +1,616 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeet Bhardwaj | AI & Data Science Engineer</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
     <style>
+        /* =========================================
+           1. THEME VARIABLES (Multi-Shade System)
+           ========================================= */
         :root {
-            /* --- ULTRA-PREMIUM WHITE & GOLD THEME --- */
-            --bg: #F8F9FA;
-            --bg-alt: #FFFFFF;
-            --surface: rgba(255, 255, 255, 0.6); 
-            --surface-hover: #FFFFFF; 
-            
-            --border: rgba(0, 0, 0, 0.08);
-            --border-glow: #D4AF37; 
-            
-            --text-main: #111111;
-            --text-dim: #555555;
-            --text-muted: #888888;
-            
-            --accent: #B8860B; 
-            --accent-secondary: #C5A059;
-            --accent-glow: rgba(212, 175, 55, 0.2);
-            
-            --card-overlay: rgba(255, 255, 255, 0.85);
-            
-            --noise-url: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.4"/%3E%3C/svg%3E');
+            --transition-speed: 0.6s;
         }
 
+        /* --- DARK THEME (Earthy Gold Palette) --- */
         [data-theme="dark"] {
-            --bg: #0A0A0A;
-            --bg-alt: #121212;
-            --surface: rgba(18, 18, 18, 0.6);
-            --surface-hover: #1A1A1A;
+            --color-50: #F5F4EF;
+            --color-100: #E3E0D3;
+            --color-200: #D1CCB7;
+            --color-300: #BFB89B;
+            --color-400: #ADA47F;
+            --color-500: #9C9063;
+            --color-600: #807652;
+            --color-700: #645C40;
+            --color-800: #45402C;
+            --color-900: #2C281C;
+            --color-950: #100E0A;
+
+            --bg: var(--color-950);
+            --bg-secondary: var(--color-900);
+            --surface: rgba(69, 64, 44, 0.4); /* color-800 alpha */
+            --surface-hover: var(--color-800);
             
-            --border: rgba(255, 255, 255, 0.08);
-            --border-glow: #D4AF37;
+            --border: var(--color-800);
+            --border-hover: var(--color-500);
             
-            --text-main: #FFFFFF;
-            --text-dim: #A0A0A0;
-            --text-muted: #666666;
+            --text-primary: var(--color-50);
+            --text-secondary: var(--color-200);
+            --text-muted: var(--color-400);
             
-            --accent: #D4AF37;
-            --accent-secondary: #E6C27A;
-            --accent-glow: rgba(212, 175, 55, 0.15);
+            --accent: var(--color-400);
+            --accent-glow: rgba(173, 164, 127, 0.15);
+            --gradient-accent: linear-gradient(135deg, rgba(156, 144, 99, 0.1) 0%, transparent 100%);
             
-            --card-overlay: rgba(10, 10, 10, 0.85);
+            --card-overlay: rgba(16, 14, 10, 0.85); /* color-950 alpha */
+            
+            /* Professional Glassy/Metallic Gradients using shades */
+            --card-glass: linear-gradient(135deg, var(--color-800), var(--color-500), var(--color-100), var(--color-400), var(--color-600), var(--color-300), var(--color-700));
+            --chip-gradient: linear-gradient(135deg, var(--color-400), var(--color-100), var(--color-500));
         }
 
+        /* --- LIGHT THEME (Mint/Teal Palette) --- */
+        [data-theme="light"] {
+            --color-50: #ECF8F5;
+            --color-100: #CAECE3;
+            --color-200: #A8E1D1;
+            --color-300: #86D5C0;
+            --color-400: #64C9AE;
+            --color-500: #42BD9C;
+            --color-600: #369B80;
+            --color-700: #2A7964;
+            --color-800: #236352;
+            --color-900: #13352C;
+            --color-950: #071310;
+
+            --bg: var(--color-50);
+            --bg-secondary: var(--color-100);
+            --surface: rgba(255, 255, 255, 0.6);
+            --surface-hover: var(--color-50);
+            
+            --border: var(--color-300);
+            --border-hover: var(--color-600);
+            
+            --text-primary: var(--color-950);
+            --text-secondary: var(--color-800);
+            --text-muted: var(--color-700);
+            
+            --accent: var(--color-600);
+            --accent-glow: rgba(54, 155, 128, 0.2);
+            --gradient-accent: linear-gradient(135deg, rgba(100, 201, 174, 0.15) 0%, transparent 100%);
+            
+            --card-overlay: rgba(236, 248, 245, 0.85);
+            
+            --card-glass: linear-gradient(135deg, var(--color-300), var(--color-500), var(--color-50), var(--color-400), var(--color-200), var(--color-600), var(--color-100));
+            --chip-gradient: linear-gradient(135deg, var(--color-400), var(--color-100), var(--color-500));
+        }
+
+        /* --- GRAYSCALE AESTHETIC THEME --- */
+        [data-theme="gray"] {
+            --color-50: #FFFFFF;
+            --color-200: #CCCCCC;
+            --color-400: #999999;
+            --color-600: #666666;
+            --color-800: #333333;
+            --color-900: #1A1A1A;
+            --color-950: #000000;
+
+            --bg: var(--color-950);
+            --bg-secondary: var(--color-900);
+            --surface: rgba(51, 51, 51, 0.6);
+            --surface-hover: var(--color-800);
+            
+            --border: var(--color-600);
+            --border-hover: var(--color-50);
+            
+            --text-primary: var(--color-50);
+            --text-secondary: var(--color-400);
+            --text-muted: var(--color-600);
+            
+            --accent: var(--color-50);
+            --accent-glow: rgba(255, 255, 255, 0.15);
+            --gradient-accent: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+            
+            --card-overlay: rgba(26, 26, 26, 0.85);
+            
+            --card-glass: linear-gradient(135deg, var(--color-600), var(--color-800), var(--color-50), var(--color-400), var(--color-900));
+            --chip-gradient: linear-gradient(135deg, var(--color-600), var(--color-200), var(--color-800));
+        }
+
+        /* =========================================
+           2. GLOBAL STYLES & BACKGROUND
+           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html { scroll-behavior: smooth; font-size: 14px; overflow-x: hidden; } 
+        html { scroll-behavior: smooth; font-size: 14px; overflow-x: hidden; background-color: var(--bg); } 
         
         body { 
             background-color: var(--bg); 
-            color: var(--text-main); 
+            color: var(--text-primary); 
             font-family: 'Inter', sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s ease;
+            transition: background-color var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1), color var(--transition-speed) ease;
         }
 
-        h1, h2, h3, h4, .brand { font-family: 'Sora', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        h1, h2, h3, h4, .brand { font-family: 'Clash Display', sans-serif; font-weight: 600; }
         a { text-decoration: none; color: inherit; transition: 0.3s ease; }
 
-        /* --- GLOBAL NOISE OVERLAY --- */
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: var(--noise-url);
-            opacity: 0.02; z-index: 9999; pointer-events: none; mix-blend-mode: multiply;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.4"/%3E%3C/svg%3E');
+            opacity: 0.03; z-index: 9999; pointer-events: none; mix-blend-mode: overlay;
         }
-        [data-theme="dark"] .noise-overlay { mix-blend-mode: overlay; opacity: 0.04; }
 
-        /* --- 3D BACKGROUND --- */
         #webgl-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-        .content-wrapper { position: relative; z-index: 2; }
+        .layout-wrapper { position: relative; z-index: 10; }
 
-        /* --- NAVIGATION --- */
+        /* =========================================
+           3. NAVIGATION
+           ========================================= */
         nav {
-            position: fixed; top: 0; width: 100%; height: 85px; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 6vw; z-index: 1000; background: transparent; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        nav.scrolled { 
-            height: 70px; background: var(--surface); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border); box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 6vw; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: transparent; transition: all 0.4s ease; border-bottom: 1px solid transparent;
         }
 
-        .nav-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-main); }
-        .nav-logo span { color: var(--accent); }
-        
-        .nav-center { display: flex; gap: 2.5rem; }
-        .nav-center a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-dim); position: relative; }
-        .nav-center a:hover { color: var(--text-main); }
-        
-        .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
-        .theme-toggle { background: none; border: none; color: var(--text-main); font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .theme-toggle:hover { color: var(--accent); transform: scale(1.1); }
-        .contact-btn {
-            background: transparent; color: var(--text-main); border: 1px solid var(--border); 
-            padding: 8px 18px; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; cursor: pointer;
+        nav.scrolled {
+            background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); padding: 1rem 6vw;
         }
-        .contact-btn:hover { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
 
-        /* --- HERO SECTION --- */
-        .hero { 
-            min-height: 100vh; display: flex; align-items: center; justify-content: space-between; 
-            padding: 120px 8vw 0 8vw; 
-            position: relative; 
-        }
-        
-        .hero-text { width: 50%; z-index: 10; display: flex; flex-direction: column; gap: 1.2rem; }
-        .hero-role { 
-            display: flex; align-items: center; gap: 1rem; color: var(--accent); font-family: monospace; 
-            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
-        }
-        .hero-role::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+        .brand { font-size: 1.5rem; letter-spacing: -0.02em; }
+        .brand span { color: var(--accent); }
 
-        .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; color: var(--text-main); font-weight: 700; letter-spacing: -0.02em; }
-        .hero-title .outline { color: var(--accent); font-style: italic; }
-        
-        .hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 90%; line-height: 1.6; font-weight: 400; margin-top: 0.5rem; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); transition: color 0.3s ease; text-transform: uppercase; letter-spacing: 1px;}
+        .nav-links a:hover { color: var(--text-primary); }
 
-        /* --- SMOOTH 3D THICK METAL CARD --- */
-        .hero-visual { 
-            width: 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            perspective: 2000px; z-index: 10; 
+        .controls { display: flex; align-items: center; gap: 1.5rem; }
+        .theme-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem; transition: color 0.3s ease; }
+        .theme-btn:hover { color: var(--accent); }
+
+        .cta-btn {
+            background: var(--text-primary); color: var(--bg); padding: 0.6rem 1.2rem; border-radius: 6px;
+            font-size: 0.85rem; font-weight: 600; transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease; border: 1px solid var(--text-primary);
+        }
+        .cta-btn:hover { background: transparent; color: var(--text-primary); }
+
+        /* =========================================
+           4. HERO SECTION & HOLOGRAPHIC CARD
+           ========================================= */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
+            padding: 120px 6vw 0 6vw; position: relative; gap: 4vw;
         }
         
-        .holo-card-container { 
-            width: 320px; height: 460px; position: relative; 
-            cursor: grab; touch-action: none; 
-            transform-style: preserve-3d;
+        .hero-content { width: 50%; z-index: 10; display: flex; flex-direction: column; gap: 1rem; }
+        
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text-secondary);
+            margin-bottom: 1rem; width: fit-content; text-transform: uppercase;
         }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite;}
+
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .hero h1 span { color: var(--text-secondary); font-style: italic; }
+
+        .hero p { font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; font-weight: 400; }
+
+        .hero-visual { width: 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; perspective: 2000px; z-index: 10; }
+        .holo-card-container { width: 320px; height: 460px; position: relative; cursor: grab; touch-action: none; transform-style: preserve-3d; }
         .holo-card-container:active { cursor: grabbing; }
         
-        /* Removed CSS transition for JS Lerp control */
-        .holo-card {
-            width: 100%; height: 100%; position: absolute;
-            transform-style: preserve-3d;
-            box-shadow: 0 0 0 transparent; /* Shadow moved to separate element for realism */
-        }
-
-        .card-shadow {
-            position: absolute; bottom: -30px; width: 80%; left: 10%; height: 20px;
-            background: rgba(0,0,0,0.3); filter: blur(20px); border-radius: 50%;
-            transition: 0.3s;
-        }
-
-        /* The solid metal edge created by layering */
-        .card-layer {
-            position: absolute; width: 100%; height: 100%;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #a67c00, #bf953f, #fcf6ba, #b38728, #fdbf59, #bf953f, #a67c00); 
-            box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
-        }
-
-        .card-face {
-            position: absolute; width: 100%; height: 100%; 
-            backface-visibility: hidden; border-radius: 12px; overflow: hidden;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4); 
-            -webkit-backface-visibility: hidden; /* Safari fix */
-        }
-
-        /* FRONT FACE: User Image */
-        .card-face.front {
-            transform: translateZ(6px);
-            display: flex; align-items: center; justify-content: center;
-            background: var(--bg-alt);
-        }
+        .holo-card { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; }
+        .card-shadow { position: absolute; bottom: -30px; width: 80%; left: 10%; height: 20px; background: rgba(0,0,0,0.3); filter: blur(20px); border-radius: 50%; transition: 0.3s; }
         
-        .card-profile-img {
-            width: 100%; height: 100%; object-fit: cover;
-            background-color: var(--border); /* Fallback */
+        .card-layer {
+            position: absolute; width: 100%; height: 100%; border-radius: 12px;
+            background: var(--card-glass); /* Now uses smooth multi-shade gradients */
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
+            transition: background var(--transition-speed) ease;
         }
 
-        /* BACK FACE: Image Background + Details */
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--border); }
+        .card-face.front { transform: translateZ(6px); display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); }
+        .card-profile-img { width: 100%; height: 100%; object-fit: cover; background-color: var(--bg); }
+        
         .card-face.back {
-            transform: rotateY(180deg) translateZ(6px);
-            padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
-            background-image: linear-gradient(var(--card-overlay), var(--card-overlay)), url('card-background.jpg');
-            background-size: cover; background-position: center;
-            border: 1px solid var(--border-glow);
+            transform: rotateY(180deg) translateZ(6px); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
+            background-image: linear-gradient(var(--card-overlay), var(--card-overlay)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;
+            border: 1px solid var(--accent);
         }
 
         .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .card-chip { 
-            width: 40px; height: 28px; border-radius: 4px; 
-            background: linear-gradient(135deg, #D4AF37, #E6C27A, #B8860B); 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 0 5px rgba(255,255,255,0.5);
-        }
+        .card-chip { width: 40px; height: 28px; border-radius: 4px; background: var(--chip-gradient); box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 0 5px rgba(255,255,255,0.3); transition: background var(--transition-speed) ease; }
+        
         .card-contact { font-size: 1.5rem; color: var(--accent); }
-        
         .card-bottom-info { margin-top: auto; }
-        .card-name { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-main); line-height: 1.1; margin-bottom: 0.2rem; }
-        .card-title { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-        .card-barcode { font-size: 2.5rem; color: var(--text-main); opacity: 0.8; margin-top: 15px; }
+        .card-name { font-family: 'Clash Display', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 0.2rem; }
+        .card-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .card-barcode { font-size: 2.5rem; color: var(--text-primary); opacity: 0.8; margin-top: 15px; }
 
-        .drag-hint {
-            margin-top: 40px; text-align: center;
-            font-size: 0.75rem; color: var(--text-dim); letter-spacing: 2px; font-family: monospace;
-            animation: pulse 2s infinite; pointer-events: none;
-        }
+        .drag-hint { margin-top: 40px; text-align: center; font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 2px; font-family: monospace; animation: pulse 2s infinite; pointer-events: none; }
 
-        /* --- SECTIONS GLOBAL --- */
-        .section { padding: 6vw 8vw; position: relative; z-index: 2; }
-        .section-header { margin-bottom: 4vw; display: flex; align-items: flex-end; gap: 1.5rem; }
-        .section-num { font-family: monospace; font-size: 3rem; color: var(--accent); opacity: 0.3; font-weight: 300; line-height: 0.8; letter-spacing: -2px; }
-        .section-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; color: var(--text-main); }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        /* --- TIMELINE --- */
-        .timeline { display: flex; flex-direction: column; gap: 0; border-left: 1px solid var(--border); margin-left: 2vw; }
-        .timeline-item { padding: 2.5rem 0 2.5rem 3.5rem; position: relative; border-bottom: 1px solid var(--border); transition: 0.3s; }
-        .timeline-item:hover { background: linear-gradient(90deg, var(--surface) 0%, transparent 100%); }
-        .timeline-item::before { 
-            content: ''; position: absolute; left: -6px; top: 3rem; width: 11px; height: 11px; 
-            background: var(--bg-alt); border: 2px solid var(--accent); border-radius: 50%; transition: 0.3s; 
-        }
-        .timeline-item:hover::before { background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); transform: scale(1.2); }
+        /* =========================================
+           5. SECTION LAYOUTS & STRUCTURE
+           ========================================= */
+        section.content-section { padding: 8vw 6vw; border-top: 1px solid var(--border); }
         
-        .tl-meta { font-family: monospace; color: var(--text-dim); font-size: 0.8rem; margin-bottom: 0.5rem; display: block; letter-spacing: 1px; font-weight: 600; }
-        .tl-title { font-size: 1.3rem; color: var(--text-main); margin-bottom: 0.3rem; font-weight: 700; }
-        .tl-org { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.8rem; }
-        .tl-desc { color: var(--text-dim); max-width: 750px; font-size: 0.9rem; line-height: 1.6; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.02em; color: var(--text-primary); }
+        .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 400px; text-align: right; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
         
-        .tl-link { 
-            display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; 
-            font-size: 0.8rem; margin-top: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+        .project-card {
+            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%;
         }
-        .tl-link:hover { color: var(--accent-secondary); }
 
-        /* --- PROJECTS GRID --- */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3vw; }
-        .project-card { 
-            position: relative; height: 420px; border-radius: 8px; overflow: hidden; background: var(--bg-alt);
-            border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: flex-end;
-            transition: all 0.4s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gradient-accent);
+            opacity: 0; transition: opacity 0.5s ease; z-index: 0; pointer-events: none;
         }
-        .project-card:hover { border-color: var(--accent); box-shadow: 0 15px 35px var(--accent-glow); transform: translateY(-5px); }
+
+        .project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .project-card:hover::before { opacity: 1; }
+
+        .project-content { position: relative; z-index: 1; flex-grow: 1; display: flex; flex-direction: column; }
         
-        .project-img { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            object-fit: cover; z-index: 0; transition: transform 0.6s ease;
-            filter: grayscale(40%) contrast(1.1);
-        }
-        .project-card:hover .project-img { transform: scale(1.05); filter: grayscale(0%); }
-
-        .project-info { 
-            position: relative; z-index: 2; padding: 2.5rem; 
-            background: linear-gradient(to top, var(--bg-alt) 40%, rgba(255,255,255,0.8) 80%, transparent 100%); 
-            height: 100%; display: flex; flex-direction: column; justify-content: flex-end; 
-        }
-        [data-theme="dark"] .project-info { background: linear-gradient(to top, var(--bg-alt) 40%, rgba(18,18,18,0.8) 80%, transparent 100%); }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); background: var(--bg); }
         
-        .project-tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .project-tag { 
-            font-family: monospace; font-size: 0.7rem; color: var(--accent); font-weight: 600;
-            border: 1px solid var(--border); padding: 0.3rem 0.8rem; border-radius: 50px; 
-            background: var(--bg); transition: 0.3s;
-        }
+        .project-title { font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; color: var(--text-primary); }
+        .project-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; line-height: 1.6; }
         
-        .project-title { font-size: 1.5rem; color: var(--text-main); margin-bottom: 0.8rem; font-weight: 700; letter-spacing: -0.01em; }
-        .project-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5; }
+        .project-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-top: auto; width: fit-content; transition: gap 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+        .project-link:hover { gap: 0.8rem; color: var(--accent); }
 
-        .project-link { 
-            display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-main); font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border-bottom: 1px solid var(--text-main); padding-bottom: 2px;
-        }
-        .project-link i { transition: transform 0.3s ease; }
-        .project-link:hover i { transform: translateX(5px) rotate(-45deg); color: var(--accent); }
-        .project-link:hover { color: var(--accent); border-color: var(--accent); }
-
-        /* --- SKILLS GRID --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2vw; }
-        .skill-group { 
-            padding: 2rem; border: 1px solid var(--border); background: var(--bg-alt); 
-            border-radius: 8px; transition: 0.4s ease; 
-        }
-        .skill-group:hover { border-color: var(--accent); box-shadow: 0 10px 25px rgba(0,0,0,0.03); }
-        .skill-group h3 { font-size: 1.1rem; color: var(--text-main); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem;}
-        .skill-group h3 i { color: var(--accent); font-size: 1.2rem; opacity: 0.8; }
+        .list-container { display: flex; flex-direction: column; }
         
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; }
-        .skill-list li { 
-            font-size: 0.85rem; color: var(--text-dim); font-weight: 500; border: 1px solid var(--border); 
-            padding: 0.4rem 0.8rem; border-radius: 4px; background: var(--bg); transition: 0.3s;
-        }
-        .skill-list li:hover { border-color: var(--accent); color: var(--accent); }
+        .list-item { display: grid; grid-template-columns: 1fr 2fr 1fr; padding: 2.5rem 0; border-bottom: 1px solid var(--border); transition: background 0.3s ease; }
+        .list-item:hover { background: var(--surface); padding-left: 1rem; padding-right: 1rem; margin-left: -1rem; margin-right: -1rem; border-radius: 8px; border-bottom-color: transparent; }
+        
+        .list-meta { color: var(--accent); font-size: 0.9rem; font-family: monospace; font-weight: 600; text-transform: uppercase;}
+        .list-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem; }
+        .list-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.8rem; font-weight: 500; }
+        .list-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+        
+        .list-right { text-align: right; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; }
+        .list-link { font-size: 0.8rem; border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 4px; transition: all 0.3s ease; color: var(--text-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+        .list-link:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* --- CERTIFICATIONS GRID --- */
-        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2vw; }
-        .cert-card {
-            display: flex; align-items: center; background: var(--bg-alt); padding: 1.5rem; 
-            border-radius: 8px; border: 1px solid var(--border); transition: 0.3s;
-        }
-        .cert-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 20px var(--accent-glow); }
-        .cert-icon { font-size: 1.8rem; color: var(--accent); margin-right: 1.2rem; }
-        .cert-info h4 { color: var(--text-main); font-size: 0.95rem; margin-bottom: 0.2rem; }
-        .cert-info a { color: var(--text-muted); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
-        .cert-info a:hover { color: var(--accent); }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .skill-pill { font-size: 1rem; font-family: 'Clash Display', sans-serif; font-weight: 500; padding: 0.8rem 1.8rem; border: 1px solid var(--border); border-radius: 100px; background: var(--bg-secondary); transition: all 0.3s ease; color: var(--text-primary); }
+        .skill-pill:hover { border-color: var(--accent); background: var(--surface-hover); color: var(--accent); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
 
-        /* --- PREMIUM FOOTER --- */
-        .premium-footer {
-            position: relative; padding: 8vw 8vw 3vw; background: var(--bg-alt); 
-            border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center;
-        }
-        .footer-massive-text { 
-            font-family: 'Sora', sans-serif; font-size: clamp(2rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; 
-            color: transparent; -webkit-text-stroke: 1px var(--border); margin-bottom: 4vw;
-            background: linear-gradient(to bottom, var(--text-main) 0%, transparent 100%); -webkit-background-clip: text;
-            text-align: center;
-        }
+        /* =========================================
+           6. PREMIUM FOOTER
+           ========================================= */
+        .premium-footer { position: relative; padding: 8vw 8vw 3vw; background: var(--bg-secondary); border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; }
+        .footer-massive-text { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1px var(--border); margin-bottom: 4vw; background: linear-gradient(to bottom, var(--text-primary) 0%, transparent 100%); -webkit-background-clip: text; text-align: center; }
         .footer-content { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; width: 100%; }
         .footer-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
-        .footer-links a { 
-            display: flex; align-items: center; justify-content: center; width: 45px; height: 45px;
-            border-radius: 50%; border: 1px solid var(--border); color: var(--text-main); font-size: 1rem;
-            background: var(--bg); transition: all 0.3s ease;
-        }
-        .footer-links a:hover { background: var(--text-main); color: var(--bg-alt); border-color: var(--text-main); transform: translateY(-3px); }
-        .footer-bottom {
-            display: flex; justify-content: space-between; align-items: center; width: 100%;
-            padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 1.5rem;
-        }
-        .footer-status { display: flex; align-items: center; gap: 8px; font-family: monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;}
+        .footer-links a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); color: var(--text-primary); font-size: 1rem; background: var(--bg); transition: all 0.3s ease; }
+        .footer-links a:hover { background: var(--text-primary); color: var(--bg-secondary); border-color: var(--text-primary); transform: translateY(-3px); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; width: 100%; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 1.5rem; }
+        .footer-status { display: flex; align-items: center; gap: 8px; font-family: monospace; font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;}
         .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
         .copyright { font-family: monospace; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- SCROLL REVEAL ANIMATIONS --- */
-        .reveal-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal-up.in-view { opacity: 1; transform: translateY(0); }
+        /* =========================================
+           7. UTILITIES & RESPONSIVE
+           ========================================= */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Mobile Adjustments */
         @media (max-width: 900px) {
-            .nav-center { display: none; }
-            .hero { flex-direction: column; justify-content: center; text-align: left; padding-top: 140px; }
-            .hero-text { width: 100%; margin-bottom: 3rem; }
+            .nav-links { display: none; }
+            .hero { flex-direction: column; justify-content: center; padding-top: 140px; text-align: left; }
+            .hero-content { width: 100%; margin-bottom: 2rem; }
             .hero-visual { width: 100%; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .section-desc { text-align: left; }
+            .list-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+            .list-right { text-align: left; align-items: flex-start; flex-direction: row; gap: 15px;}
             .projects-grid { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <div class="noise-overlay"></div>
-
     <div id="webgl-container"></div>
 
-    <div class="content-wrapper">
-
+    <div class="layout-wrapper">
+        
         <nav id="navbar">
-            <div class="nav-logo">Jeet<span>.</span></div>
-            <div class="nav-center">
-                <a href="#education">Education</a>
+            <a href="#" class="brand">Jeet<span>.</span></a>
+            <div class="nav-links">
+                <a href="#projects">Work</a>
                 <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
+                <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
-                <a href="#achievements">Achievements</a>
             </div>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
-                <a href="mailto:thejeetbhardwaj@gmail.com" class="contact-btn">CONTACT</a>
+            <div class="controls">
+                <button class="theme-btn" id="themeToggle" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="mailto:thejeetbhardwaj@gmail.com" class="cta-btn">Contact</a>
             </div>
         </nav>
 
-        <section class="hero">
-            <div class="hero-text reveal-up">
-                <div class="hero-role">AI & Data Science Engineer</div>
-                <h1 class="hero-title">
-                    Training machines to think,<br>
-                    while learning how to <span class="outline">rethink.</span>
-                </h1>
-                <p class="hero-desc">Specializing in AI, Data Science, Computer Vision, and Deep Learning. Building intelligent systems and autonomous applications with precision.</p>
-                <div class="hero-role" style="margin-top: 5px; font-size: 1rem; color: var(--text-main);">
-                    <span style="color: var(--accent); font-size: 1.5rem; font-weight: 800;">3+</span> YEARS IN AI/ML
+        <main>
+            <section class="hero">
+                <div class="hero-content reveal">
+                    <div class="hero-badge">
+                        <div class="dot"></div> System Online & Learning
+                    </div>
+                    <h1>Training machines to think,<br>while learning how to <span>rethink.</span></h1>
+                    <p>AI & Data Science Engineer specialized in Computer Vision, Deep Learning, and highly optimized inference systems.</p>
                 </div>
-            </div>
+                
+                <div class="hero-visual reveal" style="transition-delay: 0.2s;">
+                    <div class="holo-card-container" id="holo-card-container">
+                        <div class="card-shadow"></div>
+                        <div class="holo-card" id="holo-card">
+                            <div class="card-layer" style="transform: translateZ(5px)"></div>
+                            <div class="card-layer" style="transform: translateZ(4px)"></div>
+                            <div class="card-layer" style="transform: translateZ(3px)"></div>
+                            <div class="card-layer" style="transform: translateZ(2px)"></div>
+                            <div class="card-layer" style="transform: translateZ(1px)"></div>
+                            <div class="card-layer" style="transform: translateZ(0px)"></div>
+                            <div class="card-layer" style="transform: translateZ(-1px)"></div>
+                            <div class="card-layer" style="transform: translateZ(-2px)"></div>
+                            <div class="card-layer" style="transform: translateZ(-3px)"></div>
+                            <div class="card-layer" style="transform: translateZ(-4px)"></div>
+                            <div class="card-layer" style="transform: translateZ(-5px)"></div>
 
-            <div class="hero-visual reveal-up" style="transition-delay: 0.2s;">
-                <div class="holo-card-container" id="holo-card-container">
-                    <div class="card-shadow"></div>
-                    <div class="holo-card" id="holo-card">
-                        
-                        <div class="card-layer" style="transform: translateZ(5px)"></div>
-                        <div class="card-layer" style="transform: translateZ(4px)"></div>
-                        <div class="card-layer" style="transform: translateZ(3px)"></div>
-                        <div class="card-layer" style="transform: translateZ(2px)"></div>
-                        <div class="card-layer" style="transform: translateZ(1px)"></div>
-                        <div class="card-layer" style="transform: translateZ(0px)"></div>
-                        <div class="card-layer" style="transform: translateZ(-1px)"></div>
-                        <div class="card-layer" style="transform: translateZ(-2px)"></div>
-                        <div class="card-layer" style="transform: translateZ(-3px)"></div>
-                        <div class="card-layer" style="transform: translateZ(-4px)"></div>
-                        <div class="card-layer" style="transform: translateZ(-5px)"></div>
-
-                        <div class="card-face front">
-                            <img src="j.png" alt="Jeet Bhardwaj" class="card-profile-img">
-                        </div>
-
-                        <div class="card-face back">
-                            <div class="card-header">
-                                <div class="card-chip"></div>
-                                <i class="fas fa-fingerprint card-contact"></i>
+                            <div class="card-face front">
+                                <img src="j.png" alt="Jeet Bhardwaj" class="card-profile-img" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'">
                             </div>
-                            <div class="card-bottom-info">
-                                <h2 class="card-name">JEET<br>BHARDWAJ</h2>
-                                <div class="card-title">AI & Data Science Engineer</div>
-                                <div style="margin-top: 15px; font-family: monospace; font-size: 0.7rem; color: var(--text-dim); font-weight: 600;">
-                                    <span style="color: var(--accent);">EMAIL:</span> thejeetbhardwaj@gmail.com<br>
-                                    <span style="color: var(--accent);">ACCESS:</span> GRANTED
+
+                            <div class="card-face back">
+                                <div class="card-header">
+                                    <div class="card-chip"></div>
+                                    <i class="fas fa-fingerprint card-contact"></i>
                                 </div>
-                                <div class="card-barcode"><i class="fas fa-barcode"></i></div>
+                                <div class="card-bottom-info">
+                                    <h2 class="card-name">JEET<br>BHARDWAJ</h2>
+                                    <div class="card-title">AI & Data Science Engineer</div>
+                                    <div style="margin-top: 15px; font-family: monospace; font-size: 0.7rem; color: var(--text-secondary); font-weight: 600;">
+                                        <span style="color: var(--accent);">EMAIL:</span> thejeetbhardwaj@gmail.com<br>
+                                        <span style="color: var(--accent);">ACCESS:</span> GRANTED
+                                    </div>
+                                    <div class="card-barcode"><i class="fas fa-barcode"></i></div>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
+                    <div class="drag-hint">DRAG TO ROTATE</div>
                 </div>
-                <div class="drag-hint">DRAG TO ROTATE</div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section" id="education">
-            <div class="section-header reveal-up">
-                <span class="section-num">01</span>
-                <h2 class="section-title">Academic Data</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">2023 — 2027 • Gwalior</span>
-                    <h3 class="tl-title">B.Tech in Artificial Intelligence & Data Science</h3>
-                    <div class="tl-org">Madhav Institute of Technology and Science</div>
-                    <p class="tl-desc">CGPA: 9.10</p>
+            <section id="projects" class="content-section">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Selected Build Systems</h2>
+                    <p class="section-desc">A collection of research, engineering, and optimized machine learning pipelines.</p>
                 </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Sep 2024 — Apr 2025 • Remote</span>
-                    <h3 class="tl-title">BS in Data Science (Foundation Level)</h3>
-                    <div class="tl-org">IIT Madras</div>
-                    <p class="tl-desc">Grade: 8.25</p>
-                    <a href="https://ds.study.iitm.ac.in/document_verification/41ba2ce7bfc6da7866322b24418f9dcda5acc1d00ed694851ee1fbae5aeb9af5" class="tl-link" target="_blank">Verify Credential <i class="fas fa-check-circle" style="margin-left:4px;"></i></a>
-                </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">2026 • Qualified</span>
-                    <h3 class="tl-title">Graduate Aptitude Test in Engineering 2026</h3>
-                    <div class="tl-org">GATE (Data Science) Qualified</div>
-                </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">2021 — 2022 • Gwalior</span>
-                    <h3 class="tl-title">Higher Secondary</h3>
-                    <div class="tl-org">Khushhal Vidya Peeth</div>
-                    <p class="tl-desc">91%</p>
-                </div>
-            </div>
-        </section>
 
-        <section class="section" id="experience">
-            <div class="section-header reveal-up">
-                <span class="section-num">02</span>
-                <h2 class="section-title">Professional Logs</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Remote, India</span>
-                    <h3 class="tl-title">AI Intern</h3>
-                    <div class="tl-org">Microsoft, SAP, & AICTE Internship</div>
-                    <p class="tl-desc">Developed 'PoseEstimator', a real-time human pose detection system using Flask, OpenCV, and MediaPipe. Tailored custom pose analytics for fitness and sports applications.</p>
-                    <a href="https://techsaksham.org/verify-aicte-certificate/TSPIN24_610228" class="tl-link" target="_blank">View Certificate <i class="fas fa-external-link-alt" style="margin-left:4px;"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <div class="section-header reveal-up">
-                <span class="section-num">03</span>
-                <h2 class="section-title">Build Systems</h2>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1000&auto=format&fit=crop" alt="Code Abstract" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">Word2Vec</span>
-                            <span class="project-tag">Flask</span>
+                <div class="projects-grid">
+                    <div class="project-card reveal">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Computer Vision</span><span class="tag">MediaPipe</span><span class="tag">Real-Time</span>
+                            </div>
+                            <h3 class="project-title">Real-Time Drowsiness Detection</h3>
+                            <p class="project-desc">Engineered a highly performant driver safety system. Successfully transitioned from computationally heavy deep learning models to a lightning-fast real-time architecture utilizing the MediaPipe Tasks API for precise eye-aspect ratio tracking.</p>
+                            <a href="#" class="project-link">Architecture Details <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">Vector Embedding Explorer</h3>
-                        <p class="project-desc">Interactive tool to explore word embeddings from PDF documents using Word2Vec and PCA visualization.</p>
-                        <a href="https://thejeetbhardwaj-vectorembeddingexplorer.hf.space/" class="project-link" target="_blank">View on Hugging Face <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
 
-                <div class="project-card reveal-up" style="transition-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop" alt="AI Abstract" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">YOLOv8</span>
-                            <span class="project-tag">CUDA</span>
+                    <div class="project-card reveal" style="transition-delay: 0.1s;">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Digital Forensics</span><span class="tag">FaceForensics++</span>
+                            </div>
+                            <h3 class="project-title">Deepfake Forensics Engine</h3>
+                            <p class="project-desc">Advanced tampering detection pipeline trained on FaceForensics++ and FakeAVCeleb datasets. Architected strictly for visual signal inconsistencies and spatial artifacts to maximize inference speed.</p>
+                            <a href="#" class="project-link">View Research <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">AI Bot for Automated-Gameplay</h3>
-                        <p class="project-desc">Built an autonomous AI bot to master Fruit Ninja Game using Python, YOLOv8, and OpenCV with GPU acceleration.</p>
-                        <a href="https://github.com/GitHub-JeetBhardwaj/FruitNinja-AIBot" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
 
-                <div class="project-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop" alt="Hardware Abstract" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">Deep Learning</span>
-                            <span class="project-tag">CNN</span>
+                    <div class="project-card reveal">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Generative AI</span><span class="tag">GANs</span>
+                            </div>
+                            <h3 class="project-title">AnimeGen</h3>
+                            <p class="project-desc">A research-oriented, high-fidelity image-to-anime generator. Built utilizing custom Generative Adversarial Network architectures and Canny-edge stencils for structural preservation.</p>
+                            <a href="https://thejeetbhardwaj-animegen.hf.space/" target="_blank" class="project-link">Live Deployment <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">Age & Gender Recognition System</h3>
-                        <p class="project-desc">Developed an end-to-end Deep Learning application using CNNs to predict age and gender from images.</p>
-                        <a href="https://gender-age-web.vercel.app/" class="project-link" target="_blank">Live Project <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
 
-                <div class="project-card reveal-up" style="transition-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Data Tech" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">MediaPipe</span>
-                            <span class="project-tag">OpenCV</span>
+                    <div class="project-card reveal" style="transition-delay: 0.1s;">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Algorithms</span><span class="tag">Flask</span>
+                            </div>
+                            <h3 class="project-title">GeekFusion 2026 Engine</h3>
+                            <p class="project-desc">A robust evaluation normalization framework developed for MITS Gwalior. Features hardcoded algorithmic weights for technical, GD, and HR rounds, standardizing metrics on a strict 1-10 scale.</p>
+                            <a href="#" class="project-link">View Logic <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">Real Time Pose Estimator</h3>
-                        <p class="project-desc">Created a web-based human pose estimation tool using Mediapipe and OpenCV. Accurately detects body landmarks.</p>
-                        <a href="https://github.com/GitHub-JeetBhardwaj/PoseEstimator" class="project-link" target="_blank">View on GitHub <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
 
-                <div class="project-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop" alt="Generative Art" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">GAN</span>
-                            <span class="project-tag">Deep Learning</span>
+                    <div class="project-card reveal">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">NLP</span><span class="tag">Word2Vec</span><span class="tag">PCA</span>
+                            </div>
+                            <h3 class="project-title">Vector Embedding Explorer</h3>
+                            <p class="project-desc">Interactive analytical tool engineered to parse, extract, and visualize high-dimensional word embeddings from PDF documents using Word2Vec and PCA dimensionality reduction.</p>
+                            <a href="https://thejeetbhardwaj-vectorembeddingexplorer.hf.space/" target="_blank" class="project-link">Explore Data <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">Image-to-Anime Translation System</h3>
-                        <p class="project-desc">Developed a AI anime generation system to transform real-world images into anime-style visuals by training a deep learning model.</p>
-                        <a href="https://thejeetbhardwaj-animegen.hf.space/" class="project-link" target="_blank">Live Project <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
 
-                <div class="project-card reveal-up" style="transition-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?q=80&w=1000&auto=format&fit=crop" alt="Light Tech" class="project-img">
-                    <div class="project-info">
-                        <div class="project-tags">
-                            <span class="project-tag">GAN</span>
-                            <span class="project-tag">OpenCV</span>
+                    <div class="project-card reveal" style="transition-delay: 0.1s;">
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">YOLOv8</span><span class="tag">CUDA</span><span class="tag">Automation</span>
+                            </div>
+                            <h3 class="project-title">Autonomous Gameplay Bot</h3>
+                            <p class="project-desc">An autonomous, GPU-accelerated AI bot developed to master Fruit Ninja. Utilizes YOLOv8 for rapid object detection and OpenCV for precise trajectory calculation.</p>
+                            <a href="https://github.com/GitHub-JeetBhardwaj/FruitNinja-AIBot" target="_blank" class="project-link">View Source <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 class="project-title">Low-Light Image Enhancer</h3>
-                        <p class="project-desc">Developed a GAN-based low-light image enhancement system with histogram equalization to improve image visibility and contrast.</p>
-                        <a href="https://thejeetbhardwaj-lumina.hf.space/" class="project-link" target="_blank">Live Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section" id="skills">
-            <div class="section-header reveal-up">
-                <span class="section-num">04</span>
-                <h2 class="section-title">Technical Arsenal</h2>
-            </div>
+            <section id="experience" class="content-section">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Professional Logs</h2>
+                </div>
+                <div class="list-container">
+                    <div class="list-item reveal">
+                        <div class="list-meta">2024 — Present</div>
+                        <div>
+                            <h3 class="list-title">AI Intern</h3>
+                            <div class="list-subtitle">Microsoft, SAP & AICTE Internship</div>
+                            <p class="list-desc">Developed 'PoseEstimator', a real-time human pose detection system utilizing Flask, OpenCV, and MediaPipe. Tailored custom pose analytics for fitness and sports applications.</p>
+                        </div>
+                        <div class="list-right">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Remote, IN</span>
+                            <a href="https://techsaksham.org/verify-aicte-certificate/TSPIN24_610228" target="_blank" class="list-link">Verify</a>
+                        </div>
+                    </div>
+                    
+                    <div class="list-item reveal">
+                        <div class="list-meta">2024 — 2025</div>
+                        <div>
+                            <h3 class="list-title">Leadership & Operations</h3>
+                            <div class="list-subtitle">MITS Gwalior</div>
+                            <p class="list-desc">Served as Student Coordinator for the Training & Placement Cell, Competitive Programming Coordinator, and Data Co-Head for SIH 2025 internal datasets managing participant evaluation frameworks.</p>
+                        </div>
+                        <div class="list-right">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior, IN</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <div class="skills-grid">
-                <div class="skill-group reveal-up">
-                    <h3>Programming <i class="fas fa-code"></i></h3>
-                    <ul class="skill-list">
-                        <li>Python</li><li>C++</li><li>SQL</li>
-                    </ul>
+            <section id="education" class="content-section">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Academic Data</h2>
                 </div>
-                <div class="skill-group reveal-up" style="transition-delay: 0.1s;">
-                    <h3>AI / ML <i class="fas fa-brain"></i></h3>
-                    <ul class="skill-list">
-                        <li>TensorFlow</li><li>Keras</li><li>YOLO</li><li>OpenCV</li><li>MediaPipe</li>
-                    </ul>
-                </div>
-                <div class="skill-group reveal-up" style="transition-delay: 0.2s;">
-                    <h3>Web & Tools <i class="fas fa-wrench"></i></h3>
-                    <ul class="skill-list">
-                        <li>Flask</li><li>GitHub</li><li>Kaggle</li><li>Roboflow</li>
-                    </ul>
-                </div>
-                <div class="skill-group reveal-up" style="transition-delay: 0.3s;">
-                    <h3>Core Concepts <i class="fas fa-lightbulb"></i></h3>
-                    <ul class="skill-list">
-                        <li>Data Science</li><li>Deep Learning</li><li>Computer Vision</li><li>LLMs</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+                <div class="list-container">
+                    <div class="list-item reveal">
+                        <div class="list-meta">2023 — 2027</div>
+                        <div>
+                            <h3 class="list-title">B.Tech in Artificial Intelligence & Data Science</h3>
+                            <div class="list-subtitle">Madhav Institute of Technology and Science</div>
+                            <p class="list-desc">CGPA: 9.10. Awarded Best Research Paper at the 2026 International Conference (Scopus-Indexed) for advancements in AI and Computer Vision.</p>
+                        </div>
+                        <div class="list-right">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior, IN</span>
+                        </div>
+                    </div>
 
-        <section class="section" id="achievements">
-            <div class="section-header reveal-up">
-                <span class="section-num">05</span>
-                <h2 class="section-title">Leadership & Accolades</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Aug 2024 — Aug 2025</span>
-                    <h3 class="tl-title">Student Coordinator (Training & Placement Cell)</h3>
-                    <div class="tl-org">MITS, Gwalior</div>
-                    <p class="tl-desc">Student Representative in Training and Placement.</p>
+                    <div class="list-item reveal">
+                        <div class="list-meta">Sep 2024 — Apr 2025</div>
+                        <div>
+                            <h3 class="list-title">BS in Data Science (Foundation Level)</h3>
+                            <div class="list-subtitle">IIT Madras</div>
+                            <p class="list-desc">Grade: 8.25. Rigorous remote program focusing on mathematics, statistics, and foundational data methodologies.</p>
+                        </div>
+                        <div class="list-right">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Remote</span>
+                            <a href="https://ds.study.iitm.ac.in/document_verification/41ba2ce7bfc6da7866322b24418f9dcda5acc1d00ed694851ee1fbae5aeb9af5" target="_blank" class="list-link">Verify</a>
+                        </div>
+                    </div>
+                    
+                    <div class="list-item reveal">
+                        <div class="list-meta">2026</div>
+                        <div>
+                            <h3 class="list-title">Graduate Aptitude Test in Engineering 2026</h3>
+                            <div class="list-subtitle">GATE (Data Science) Qualified</div>
+                        </div>
+                        <div class="list-right">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">National</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Oct 2024 — Present</span>
-                    <h3 class="tl-title">Competitive Programming Coordinator</h3>
-                    <div class="tl-org">MITS, Gwalior</div>
-                    <p class="tl-desc">Organizing coding contests and mentoring peers.</p>
-                </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Aug 2025 — Present</span>
-                    <h3 class="tl-title">Coordinator for Outcome-Based Education</h3>
-                    <div class="tl-org">MITS, Gwalior</div>
-                    <p class="tl-desc">Managing student performance data and curriculum mapping.</p>
-                </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">Aug 2025 — Sep 2025</span>
-                    <h3 class="tl-title">Data and Operations Co-Head — SIH 2025</h3>
-                    <div class="tl-org">MITS, Gwalior</div>
-                    <p class="tl-desc">Managed participant datasets for Smart India Hackathon internal round.</p>
-                </div>
-                <div class="timeline-item reveal-up">
-                    <span class="tl-meta">2026</span>
-                    <h3 class="tl-title">Best Research Paper Award — International Conference</h3>
-                    <div class="tl-org">Anurag University</div>
-                    <p class="tl-desc">Presented a research paper in the field of AI and Computer Vision at International Conference (Scopus-Indexed) and received the best research paper award.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section" id="certifications">
-            <div class="section-header reveal-up">
-                <span class="section-num">06</span>
-                <h2 class="section-title">Certifications</h2>
-            </div>
-            <div class="cert-grid">
-                <div class="cert-card reveal-up">
-                    <div class="cert-icon"><i class="fas fa-robot"></i></div>
-                    <div class="cert-info">
-                        <h4>Foundation of Cognitive Robotics</h4>
-                        <a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/112/noc24-me82/Course/NPTEL24ME82S43620029202618070.pdf" target="_blank">NPTEL Swayam (IIT Madras)</a>
+            <section id="certifications" class="content-section">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Key Certifications</h2>
+                </div>
+                <div class="list-container">
+                    <div class="list-item reveal">
+                        <div class="list-meta">NPTEL Swayam</div>
+                        <div>
+                            <h3 class="list-title">Cognitive Robotics & Large Language Models</h3>
+                            <div class="list-subtitle">IIT Madras</div>
+                            <p class="list-desc">Foundation of Cognitive Robotics and Introduction to LLMs deep-dive courses.</p>
+                        </div>
+                        <div class="list-right">
+                            <a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/112/noc24-me82/Course/NPTEL24ME82S43620029202618070.pdf" target="_blank" class="list-link">View Robotics</a>
+                        </div>
+                    </div>
+
+                    <div class="list-item reveal">
+                        <div class="list-meta">NPTEL Swayam</div>
+                        <div>
+                            <h3 class="list-title">Cyber Security, Privacy & Ethical Hacking</h3>
+                            <div class="list-subtitle">IIT Madras & IIT Kharagpur</div>
+                            <p class="list-desc">Advanced systems security, digital privacy mechanisms, and ethical hacking protocols.</p>
+                        </div>
+                        <div class="list-right">
+                            <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS116S65760059110548024" target="_blank" class="list-link">View Cyber</a>
+                        </div>
                     </div>
                 </div>
-                <div class="cert-card reveal-up" style="transition-delay: 0.1s;">
-                    <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
-                    <div class="cert-info">
-                        <h4>Cyber Security & Privacy</h4>
-                        <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS116S65760059110548024" target="_blank">NPTEL Swayam (IIT Madras)</a>
-                    </div>
+            </section>
+
+            <section id="skills" class="content-section">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Technical Arsenal</h2>
                 </div>
-                <div class="cert-card reveal-up" style="transition-delay: 0.2s;">
-                    <div class="cert-icon"><i class="fas fa-user-secret"></i></div>
-                    <div class="cert-info">
-                        <h4>Ethical Hacking</h4>
-                        <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS142S95760009310548024" target="_blank">NPTEL Swayam (IIT Kharagpur)</a>
-                    </div>
+                <div class="skills-container reveal">
+                    <div class="skill-pill">Python</div>
+                    <div class="skill-pill">C++</div>
+                    <div class="skill-pill">SQL</div>
+                    <div class="skill-pill">TensorFlow</div>
+                    <div class="skill-pill">Keras</div>
+                    <div class="skill-pill">PyTorch</div>
+                    <div class="skill-pill">YOLO</div>
+                    <div class="skill-pill">OpenCV</div>
+                    <div class="skill-pill">MediaPipe</div>
+                    <div class="skill-pill">Generative AI</div>
+                    <div class="skill-pill">Computer Vision</div>
+                    <div class="skill-pill">Flask</div>
+                    <div class="skill-pill">LaTeX</div>
+                    <div class="skill-pill">GitHub</div>
+                    <div class="skill-pill">Kaggle</div>
                 </div>
-                <div class="cert-card reveal-up" style="transition-delay: 0.3s;">
-                    <div class="cert-icon"><i class="fas fa-brain"></i></div>
-                    <div class="cert-info">
-                        <h4>Introduction to Large Language Model</h4>
-                        <a href="https://nptel.ac.in/noc/E_Certificate/NOC26CS88S25570050904568375" target="_blank">NPTEL Swayam (IIT Madras)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
+            </section>
+        </main>
+
         <footer class="premium-footer">
-            <div class="footer-massive-text reveal-up">JEET BHARDWAJ</div>
+            <div class="footer-massive-text reveal">JEET BHARDWAJ</div>
             
-            <div class="footer-content reveal-up" style="transition-delay: 0.1s;">
+            <div class="footer-content reveal" style="transition-delay: 0.1s;">
                 <div class="footer-links">
                     <a href="https://github.com/GitHub-JeetBhardwaj" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://linkedin.com/in/thejeetbhardwaj" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -696,38 +628,60 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
     <script>
-        // --- SMOOTH LERP 3D CARD DRAG LOGIC ---
+        // --- 1. THEME SWITCHER LOGIC ---
+        const themes = ['dark', 'light', 'gray'];
+        let currentThemeIndex = 0; 
+        const htmlElement = document.documentElement;
+        const themeBtn = document.getElementById('themeToggle');
+
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme && themes.includes(savedTheme)) {
+            currentThemeIndex = themes.indexOf(savedTheme);
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon();
+        }
+
+        themeBtn.addEventListener('click', () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('portfolio-theme', newTheme);
+            updateThemeIcon();
+            updateThreeJSColors(newTheme);
+        });
+
+        function updateThemeIcon() {
+            const theme = themes[currentThemeIndex];
+            if (theme === 'light') themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            else if (theme === 'dark') themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            else themeBtn.innerHTML = '<i class="fas fa-adjust"></i>';
+        }
+
+        // --- 2. SMOOTH 3D LERP CARD LOGIC ---
         const cardContainer = document.getElementById('holo-card-container');
         const card = document.getElementById('holo-card');
         
         let isDragging = false;
         let startX = 0, startY = 0;
         let startRotX = 0, startRotY = 0;
-        
         let targetRotX = 0, targetRotY = 0;
         let currentRotX = 0, currentRotY = 0;
 
-        // Pointer events for better cross-device drag compatibility
         cardContainer.addEventListener('pointerdown', (e) => {
             isDragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            startRotX = targetRotX;
-            startRotY = targetRotY;
+            startX = e.clientX; startY = e.clientY;
+            startRotX = targetRotX; startRotY = targetRotY;
             cardContainer.style.cursor = 'grabbing';
-            e.preventDefault(); // Prevent accidental image drag
+            e.preventDefault(); 
         });
 
         window.addEventListener('pointermove', (e) => {
             if (!isDragging) return;
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
-            
-            // Map drag pixels to rotation target
             targetRotY = startRotY + (deltaX * 0.4); 
             targetRotX = startRotX - (deltaY * 0.4);
         });
@@ -737,77 +691,43 @@
             isDragging = false;
             cardContainer.style.cursor = 'grab';
             
-            // Snap logic (Find closest 180 degree face)
             const normalizedY = targetRotY % 360;
             let snapY = 0;
-            
             if (normalizedY > 90 && normalizedY <= 270) snapY = 180;
             else if (normalizedY < -90 && normalizedY >= -270) snapY = -180;
             else if (normalizedY > 270) snapY = 360;
             else if (normalizedY < -270) snapY = -360;
             
-            targetRotX = 0; // Snap to upright
+            targetRotX = 0;
             targetRotY = snapY;
         });
 
-        // The Lerp loop for buttery smooth rendering (no CSS transition needed)
         function animateCard() {
-            // Lerp formula: current += (target - current) * friction
             currentRotX += (targetRotX - currentRotX) * 0.08;
             currentRotY += (targetRotY - currentRotY) * 0.08;
-            
             card.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
             requestAnimationFrame(animateCard);
         }
-        animateCard(); // Start the loop
+        animateCard(); 
 
-
-        // --- Intersection Observer for Scroll Reveals ---
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries, obs) => {
+        // --- 3. SCROLL REVEAL & NAVBAR ANIMATIONS ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                    obs.unobserve(entry.target); 
+                    entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
-        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        revealElements.forEach(el => revealObserver.observe(el));
 
-
-        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
 
-
-        // --- Theme Toggle Logic ---
-        const themeBtn = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        if(localStorage.getItem('theme') === 'dark') {
-            html.setAttribute('data-theme', 'dark');
-            themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-
-        themeBtn.addEventListener('click', () => {
-            if(html.getAttribute('data-theme') === 'light') {
-                html.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                updateThreeJSColors(true);
-            } else {
-                html.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                updateThreeJSColors(false);
-            }
-        });
-
-
-        // --- PREMIUM 3D NON-INTERACTIVE BACKGROUND ---
+        // --- 4. 3D ICOSAHEDRON BACKGROUND ---
         const container = document.getElementById('webgl-container');
         const scene = new THREE.Scene();
         
@@ -822,12 +742,8 @@
         const geometry = new THREE.IcosahedronGeometry(12, 1);
         
         const material = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            metalness: 0.1,
-            roughness: 0.5,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.15
+            color: 0xffffff, metalness: 0.1, roughness: 0.5,
+            wireframe: true, transparent: true, opacity: 0.15
         });
 
         const mesh = new THREE.Mesh(geometry, material);
@@ -836,28 +752,34 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
 
-        const goldLight = new THREE.PointLight(0xD4AF37, 2, 50);
-        goldLight.position.set(10, 10, 10);
-        scene.add(goldLight);
+        const accentLight = new THREE.PointLight(0xADA47F, 2, 50); 
+        accentLight.position.set(10, 10, 10);
+        scene.add(accentLight);
 
         const whiteLight = new THREE.PointLight(0xffffff, 1, 50);
         whiteLight.position.set(-10, -10, -10);
         scene.add(whiteLight);
 
-        let isDarkTheme = html.getAttribute('data-theme') === 'dark';
-
-        function updateThreeJSColors(isDark) {
-            if(isDark) {
-                material.color.setHex(0x333333);
+        // Update 3D Object Color based on the multi-shade themes
+        function updateThreeJSColors(theme) {
+            if(theme === 'dark') {
+                material.color.setHex(0x45402C); // Earthy dark
                 material.opacity = 0.3;
-                goldLight.intensity = 4;
-            } else {
-                material.color.setHex(0xaaaaaa);
-                material.opacity = 0.15;
-                goldLight.intensity = 2;
+                accentLight.color.setHex(0xADA47F); // Earthy accent
+                accentLight.intensity = 4;
+            } else if(theme === 'light') {
+                material.color.setHex(0x86D5C0); // Mint/Teal
+                material.opacity = 0.25;
+                accentLight.color.setHex(0x369B80); // Teal accent
+                accentLight.intensity = 2;
+            } else if(theme === 'gray') {
+                material.color.setHex(0x666666); 
+                material.opacity = 0.25;
+                accentLight.color.setHex(0xffffff); 
+                accentLight.intensity = 3;
             }
         }
-        updateThreeJSColors(isDarkTheme);
+        updateThreeJSColors(themes[currentThemeIndex]);
 
         const clock = new THREE.Clock();
 
@@ -865,14 +787,10 @@
             requestAnimationFrame(animateBg);
             const elapsedTime = clock.getElapsedTime();
 
-            // Constant, slow rotation decoupled from cursor
             mesh.rotation.x += 0.0015;
             mesh.rotation.y += 0.0020;
-            
-            // Subtle floating effect
             mesh.position.y = Math.sin(elapsedTime * 0.5) * 1.2;
-
-            // Parallax scroll effect
+            
             const scrollY = window.scrollY;
             camera.position.y = -(scrollY * 0.005);
 
@@ -884,6 +802,7 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         });
     </script>
 </body>
