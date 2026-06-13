@@ -182,7 +182,7 @@
         .cta-btn:hover { background: transparent; color: var(--text-primary); }
 
         /* =========================================
-           4. HERO SECTION, HOLOGRAPHIC CARD & SCROLL ARROW
+           4. HERO SECTION, HOLOGRAPHIC CARD & CONTROLS
            ========================================= */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
@@ -246,30 +246,39 @@
         .card-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
         .card-barcode { font-size: 2.5rem; color: var(--text-primary); opacity: 0.8; margin-top: 15px; }
 
-        .drag-hint { margin-top: 40px; text-align: center; font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 2px; font-family: monospace; animation: pulse 2s infinite; pointer-events: none; }
-
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
-
-        /* SCROLL DOWN ARROW */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-secondary);
-            font-size: 2rem;
-            cursor: pointer;
+        /* VISUAL CONTROLS UNDER CARD */
+        .visual-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 40px;
             z-index: 20;
-            animation: bounce 2s infinite;
+        }
+
+        .drag-hint { 
+            font-size: 0.75rem; 
+            color: var(--text-secondary); 
+            letter-spacing: 2px; 
+            font-family: monospace; 
+            animation: pulse 2s infinite; 
+            pointer-events: none; 
+        }
+
+        .scroll-indicator {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--surface);
             border: 1px solid var(--border);
-            transition: color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
+            animation: bounce-local 2s infinite;
         }
 
         .scroll-indicator:hover {
@@ -277,10 +286,12 @@
             border-color: var(--accent);
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-15px) translateX(-50%); }
-            60% { transform: translateY(-7px) translateX(-50%); }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        
+        @keyframes bounce-local {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
         }
 
         /* =========================================
@@ -364,12 +375,10 @@
                 justify-content: center; 
                 align-items: center;
                 padding-top: 100px; 
-                padding-bottom: 120px; /* Added extra padding to prevent overlapping with the arrow */
+                padding-bottom: 60px;
                 text-align: center; 
             }
-            .hero-content { 
-                display: contents; 
-            }
+            .hero-content { display: contents; }
             
             .hero-badge { order: 1; margin: 0 auto 1.5rem auto; }
             .hero-visual { order: 2; width: 100%; margin-bottom: 2rem; }
@@ -455,13 +464,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="drag-hint">DRAG TO ROTATE</div>
-                </div>
+                    
+                    <div class="visual-controls">
+                        <div class="drag-hint">DRAG TO ROTATE</div>
+                        <div class="scroll-indicator" id="scroll-arrow" aria-label="Scroll Down">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
 
-                <div class="scroll-indicator" id="scroll-arrow" aria-label="Scroll Down">
-                    <i class="fas fa-chevron-down"></i>
                 </div>
-
             </section>
 
             <section id="projects" class="content-section">
@@ -722,56 +733,50 @@
             else themeBtn.innerHTML = '<i class="fas fa-adjust"></i>';
         }
 
-        // --- 2. SMOOTH 3D LERP CARD LOGIC (UPDATED) ---
+        // --- 2. SMOOTH 3D LERP CARD LOGIC (UPDATED FOR SCROLL FIX) ---
         const cardContainer = document.getElementById('holo-card-container');
         const card = document.getElementById('holo-card');
 
         let isDragging = false;
-        let startX = 0, startY = 0;
-        let startRotX = 0, startRotY = 0;
-        let targetRotX = 0, targetRotY = 0;
-        let currentRotX = 0, currentRotY = 0;
+        let startX = 0;
+        let startRotY = 0;
+        let targetRotY = 0;
+        let currentRotY = 0;
 
+        // Added passive: true so the browser knows JS won't prevent native scrolling
         cardContainer.addEventListener('pointerdown', (e) => {
             isDragging = true;
-            startX = e.clientX; startY = e.clientY;
-            startRotX = targetRotX; startRotY = targetRotY;
+            startX = e.clientX;
+            startRotY = targetRotY;
             cardContainer.style.cursor = 'grabbing';
-            
-            // Capture the pointer so it doesn't lose focus if you drag outside the card
-            cardContainer.setPointerCapture(e.pointerId);
-        });
+            // Removed setPointerCapture so native mobile scroll doesn't get "stolen"
+        }, { passive: true });
 
         window.addEventListener('pointermove', (e) => {
             if (!isDragging) return;
             const deltaX = e.clientX - startX;
-            const deltaY = e.clientY - startY;
             
+            // Restrict rotation to the Y-axis ONLY (left/right drag)
+            // This prevents the card from fighting with vertical scrolling (up/down drag)
             targetRotY = startRotY + (deltaX * 0.5); 
-            targetRotX = startRotX - (deltaY * 0.5);
-        });
+        }, { passive: true });
 
-        // A single function to handle both pointerup and pointercancel
         function endDrag(e) {
             if (!isDragging) return;
             isDragging = false;
             cardContainer.style.cursor = 'grab';
-            cardContainer.releasePointerCapture(e.pointerId);
             
-            // Snap to the closest face (increments of 180 degrees)
+            // Snap to the closest face
             targetRotY = Math.round(targetRotY / 180) * 180;
-            
-            // Reset X rotation on release to keep the card visually upright
-            targetRotX = 0;
         }
 
         window.addEventListener('pointerup', endDrag);
-        window.addEventListener('pointercancel', endDrag); // Crucial for stopping the "stuck" bug
+        window.addEventListener('pointercancel', endDrag);
 
         function animateCard() {
-            currentRotX += (targetRotX - currentRotX) * 0.08;
             currentRotY += (targetRotY - currentRotY) * 0.08;
-            card.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+            // Only update rotation along the Y axis
+            card.style.transform = `rotateY(${currentRotY}deg)`;
             requestAnimationFrame(animateCard);
         }
         animateCard(); 
