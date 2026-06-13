@@ -35,7 +35,7 @@
 
             --bg: var(--color-950);
             --bg-secondary: var(--color-900);
-            --surface: rgba(69, 64, 44, 0.4); /* color-800 alpha */
+            --surface: rgba(69, 64, 44, 0.4);
             --surface-hover: var(--color-800);
             
             --border: var(--color-800);
@@ -49,9 +49,8 @@
             --accent-glow: rgba(173, 164, 127, 0.15);
             --gradient-accent: linear-gradient(135deg, rgba(156, 144, 99, 0.1) 0%, transparent 100%);
             
-            --card-overlay: rgba(16, 14, 10, 0.85); /* color-950 alpha */
+            --card-overlay: rgba(16, 14, 10, 0.85);
             
-            /* Professional Glassy/Metallic Gradients using shades */
             --card-glass: linear-gradient(135deg, var(--color-800), var(--color-500), var(--color-100), var(--color-400), var(--color-600), var(--color-300), var(--color-700));
             --chip-gradient: linear-gradient(135deg, var(--color-400), var(--color-100), var(--color-500));
         }
@@ -205,7 +204,17 @@
         .hero p { font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; font-weight: 400; }
 
         .hero-visual { width: 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; perspective: 2000px; z-index: 10; }
-        .holo-card-container { width: 320px; height: 460px; position: relative; cursor: grab; touch-action: none; transform-style: preserve-3d; }
+        
+        .holo-card-container { 
+            width: 320px; 
+            height: 460px; 
+            position: relative; 
+            cursor: grab; 
+            touch-action: pan-y; 
+            transform-style: preserve-3d; 
+            user-select: none;
+            -webkit-user-select: none;
+        }
         .holo-card-container:active { cursor: grabbing; }
         
         .holo-card { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; }
@@ -213,7 +222,7 @@
         
         .card-layer {
             position: absolute; width: 100%; height: 100%; border-radius: 12px;
-            background: var(--card-glass); /* Now uses smooth multi-shade gradients */
+            background: var(--card-glass);
             box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
             transition: background var(--transition-speed) ease;
         }
@@ -316,9 +325,23 @@
 
         @media (max-width: 900px) {
             .nav-links { display: none; }
-            .hero { flex-direction: column; justify-content: center; padding-top: 140px; text-align: left; }
-            .hero-content { width: 100%; margin-bottom: 2rem; }
-            .hero-visual { width: 100%; }
+            
+            .hero { 
+                flex-direction: column; 
+                justify-content: center; 
+                align-items: center;
+                padding-top: 140px; 
+                text-align: center; 
+            }
+            .hero-content { 
+                display: contents; 
+            }
+            
+            .hero-badge { order: 1; margin: 0 auto 1.5rem auto; }
+            .hero-visual { order: 2; width: 100%; margin-bottom: 2rem; }
+            .hero h1 { order: 3; margin-bottom: 1rem; }
+            .hero p { order: 4; margin: 0 auto 2rem auto; }
+
             .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
             .section-desc { text-align: left; }
             .list-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
@@ -353,15 +376,15 @@
 
         <main>
             <section class="hero">
-                <div class="hero-content reveal">
-                    <div class="hero-badge">
+                <div class="hero-content">
+                    <div class="hero-badge reveal">
                         <div class="dot"></div> System Online & Learning
                     </div>
-                    <h1>Training machines to think,<br>while learning how to <span>rethink.</span></h1>
-                    <p>AI & Data Science Engineer specialized in Computer Vision, Deep Learning, and highly optimized inference systems.</p>
+                    <h1 class="reveal" style="transition-delay: 0.1s;">Training machines to think,<br>while learning how to <span>rethink.</span></h1>
+                    <p class="reveal" style="transition-delay: 0.2s;">AI & Data Science Engineer specialized in Computer Vision, Deep Learning, and highly optimized inference systems.</p>
                 </div>
                 
-                <div class="hero-visual reveal" style="transition-delay: 0.2s;">
+                <div class="hero-visual reveal" style="transition-delay: 0.3s;">
                     <div class="holo-card-container" id="holo-card-container">
                         <div class="card-shadow"></div>
                         <div class="holo-card" id="holo-card">
@@ -378,7 +401,7 @@
                             <div class="card-layer" style="transform: translateZ(-5px)"></div>
 
                             <div class="card-face front">
-                                <img src="j.png" alt="Jeet Bhardwaj" class="card-profile-img" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'">
+                                <img src="j.png" alt="Jeet Bhardwaj" class="card-profile-img" draggable="false" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'">
                             </div>
 
                             <div class="card-face back">
@@ -660,10 +683,10 @@
             else themeBtn.innerHTML = '<i class="fas fa-adjust"></i>';
         }
 
-        // --- 2. SMOOTH 3D LERP CARD LOGIC ---
+        // --- 2. SMOOTH 3D LERP CARD LOGIC (UPDATED) ---
         const cardContainer = document.getElementById('holo-card-container');
         const card = document.getElementById('holo-card');
-        
+
         let isDragging = false;
         let startX = 0, startY = 0;
         let startRotX = 0, startRotY = 0;
@@ -675,32 +698,36 @@
             startX = e.clientX; startY = e.clientY;
             startRotX = targetRotX; startRotY = targetRotY;
             cardContainer.style.cursor = 'grabbing';
-            e.preventDefault(); 
+            
+            // Capture the pointer so it doesn't lose focus if you drag outside the card
+            cardContainer.setPointerCapture(e.pointerId);
         });
 
         window.addEventListener('pointermove', (e) => {
             if (!isDragging) return;
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
-            targetRotY = startRotY + (deltaX * 0.4); 
-            targetRotX = startRotX - (deltaY * 0.4);
+            
+            targetRotY = startRotY + (deltaX * 0.5); 
+            targetRotX = startRotX - (deltaY * 0.5);
         });
 
-        window.addEventListener('pointerup', (e) => {
+        // A single function to handle both pointerup and pointercancel
+        function endDrag(e) {
             if (!isDragging) return;
             isDragging = false;
             cardContainer.style.cursor = 'grab';
+            cardContainer.releasePointerCapture(e.pointerId);
             
-            const normalizedY = targetRotY % 360;
-            let snapY = 0;
-            if (normalizedY > 90 && normalizedY <= 270) snapY = 180;
-            else if (normalizedY < -90 && normalizedY >= -270) snapY = -180;
-            else if (normalizedY > 270) snapY = 360;
-            else if (normalizedY < -270) snapY = -360;
+            // Snap to the closest face (increments of 180 degrees)
+            targetRotY = Math.round(targetRotY / 180) * 180;
             
+            // Reset X rotation on release to keep the card visually upright
             targetRotX = 0;
-            targetRotY = snapY;
-        });
+        }
+
+        window.addEventListener('pointerup', endDrag);
+        window.addEventListener('pointercancel', endDrag); // Crucial for stopping the "stuck" bug
 
         function animateCard() {
             currentRotX += (targetRotX - currentRotX) * 0.08;
@@ -760,17 +787,16 @@
         whiteLight.position.set(-10, -10, -10);
         scene.add(whiteLight);
 
-        // Update 3D Object Color based on the multi-shade themes
         function updateThreeJSColors(theme) {
             if(theme === 'dark') {
-                material.color.setHex(0x45402C); // Earthy dark
+                material.color.setHex(0x45402C);
                 material.opacity = 0.3;
-                accentLight.color.setHex(0xADA47F); // Earthy accent
+                accentLight.color.setHex(0xADA47F);
                 accentLight.intensity = 4;
             } else if(theme === 'light') {
-                material.color.setHex(0x86D5C0); // Mint/Teal
+                material.color.setHex(0x86D5C0);
                 material.opacity = 0.25;
-                accentLight.color.setHex(0x369B80); // Teal accent
+                accentLight.color.setHex(0x369B80);
                 accentLight.intensity = 2;
             } else if(theme === 'gray') {
                 material.color.setHex(0x666666); 
