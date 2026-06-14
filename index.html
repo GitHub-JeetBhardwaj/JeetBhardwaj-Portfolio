@@ -99,7 +99,7 @@
         }
         .brand { font-size: 1.5rem; letter-spacing: -0.02em; }
         .brand span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; }
+        .nav-links { display: flex; gap: 1.5rem; }
         .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;}
         .nav-links a:hover { color: var(--text-primary); }
         .controls { display: flex; align-items: center; gap: 1.5rem; }
@@ -116,7 +116,7 @@
            ========================================= */
         #hero-scroll-track { position: relative; height: 400vh; width: 100%; background-color: transparent; z-index: 5; }
         .hero-sticky-container { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background-color: transparent; }
-        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 100; pointer-events: none; }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 1; pointer-events: none; } /* FIXED OPACITY TO 1 */
 
         .hero-layout {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 6vw; gap: 4vw; z-index: 10;
@@ -146,12 +146,19 @@
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
         .project-card { 
             background: var(--bg-secondary); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
             position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%; 
         }
         .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gradient-accent); opacity: 0; transition: opacity 0.5s ease; z-index: 0; pointer-events: none; }
         .project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .project-card:hover::before { opacity: 1; }
+        
+        /* New Project Image Styling */
+        .project-image { 
+            width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; 
+            border: 1px solid var(--border); position: relative; z-index: 1; 
+        }
+        
         .project-content { position: relative; z-index: 1; flex-grow: 1; display: flex; flex-direction: column; }
         .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); background: var(--bg); }
@@ -240,9 +247,9 @@
             <a href="#projects">Work</a>
             <a href="#experience">Experience</a>
             <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
             <a href="#achievements">Leadership</a>
             <a href="#certifications">Certifications</a>
-            <a href="#skills">Skills</a>
         </div>
         <div class="controls">
             <button class="theme-btn" id="themeToggle" aria-label="Toggle Theme">
@@ -269,6 +276,7 @@
             </div>
         </section>
 
+        <!-- 01 // BUILD SYSTEMS -->
         <section id="projects" class="content-section">
             <div class="section-header reveal">
                 <div class="section-separator">01 // BUILD SYSTEMS</div>
@@ -277,6 +285,7 @@
             
             <div class="projects-grid">
                 <div class="project-card reveal">
+                    <img src="vector_embedding_explorer.jpg" alt="Vector Embedding Explorer" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">NLP</span><span class="tag">Word2Vec</span><span class="tag">Flask</span>
@@ -288,6 +297,7 @@
                 </div>
 
                 <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <img src="ai_bot_for_automated_gameplay.jpg" alt="AI Bot for Automated-Gameplay" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">Computer Vision</span><span class="tag">YOLOv8</span><span class="tag">CUDA</span>
@@ -299,6 +309,7 @@
                 </div>
 
                 <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <img src="age_and_gender_recognition_system.jpg" alt="Age & Gender Recognition System" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">Deep Learning</span><span class="tag">CNN</span>
@@ -310,6 +321,7 @@
                 </div>
 
                 <div class="project-card reveal">
+                    <img src="real_time_pose_estimator.jpg" alt="Real Time Pose Estimator" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">MediaPipe</span><span class="tag">OpenCV</span>
@@ -321,6 +333,7 @@
                 </div>
 
                 <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <img src="image_to_anime_translation_system.jpg" alt="Image-to-Anime Translation System" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">GAN</span><span class="tag">Deep Learning</span>
@@ -332,6 +345,7 @@
                 </div>
 
                 <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <img src="low_light_image_enhancer.jpg" alt="Low-Light Image Enhancer" class="project-image">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">GAN</span><span class="tag">OpenCV</span>
@@ -344,6 +358,7 @@
             </div>
         </section>
 
+        <!-- 02 // PROFESSIONAL LOGS -->
         <section id="experience" class="content-section">
             <div class="section-header reveal">
                 <div class="section-separator">02 // PROFESSIONAL LOGS</div>
@@ -366,6 +381,7 @@
             </div>
         </section>
 
+        <!-- 03 // ACADEMIC DATA -->
         <section id="education" class="content-section">
             <div class="section-header reveal">
                 <div class="section-separator">03 // ACADEMIC DATA</div>
@@ -424,9 +440,60 @@
             </div>
         </section>
 
+        <!-- 04 // TECHNICAL ARSENAL -->
+        <section id="skills" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">04 // TECHNICAL ARSENAL</div>
+                <h2 class="section-title">Skills</h2>
+            </div>
+            
+            <div class="skills-wrapper reveal">
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Python</span> <i class="fab fa-python"></i></div>
+                        <div class="skill-pill"><span>C++</span> <i class="fas fa-code"></i></div>
+                        <div class="skill-pill"><span>SQL</span> <i class="fas fa-database"></i></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>AI/ML</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>TensorFlow</span> <i class="fas fa-brain"></i></div>
+                        <div class="skill-pill"><span>Keras</span> <i class="fas fa-layer-group"></i></div>
+                        <div class="skill-pill"><span>YOLO</span> <i class="fas fa-crosshairs"></i></div>
+                        <div class="skill-pill"><span>OpenCV</span> <i class="fas fa-camera"></i></div>
+                        <div class="skill-pill"><span>MediaPipe</span> <i class="fas fa-hand-sparkles"></i></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Web & Tools</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Flask</span> <i class="fas fa-server"></i></div>
+                        <div class="skill-pill"><span>GitHub</span> <i class="fab fa-github"></i></div>
+                        <div class="skill-pill"><span>Kaggle</span> <i class="fab fa-kaggle"></i></div>
+                        <div class="skill-pill"><span>Roboflow</span> <i class="fas fa-box-open"></i></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Concepts</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Data Science</span> <i class="fas fa-chart-bar"></i></div>
+                        <div class="skill-pill"><span>Deep Learning</span> <i class="fas fa-network-wired"></i></div>
+                        <div class="skill-pill"><span>Computer Vision</span> <i class="fas fa-eye"></i></div>
+                        <div class="skill-pill"><span>Large Language Models</span> <i class="fas fa-robot"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 // LEADERSHIP -->
         <section id="achievements" class="content-section">
             <div class="section-header reveal">
-                <div class="section-separator">04 // LEADERSHIP</div>
+                <div class="section-separator">05 // LEADERSHIP</div>
                 <h2 class="section-title">Academic & Leadership Achievements</h2>
             </div>
             
@@ -483,9 +550,10 @@
             </div>
         </section>
 
+        <!-- 06 // CERTIFICATIONS -->
         <section id="certifications" class="content-section">
             <div class="section-header reveal">
-                <div class="section-separator">05 // CERTIFICATIONS</div>
+                <div class="section-separator">06 // CERTIFICATIONS</div>
                 <h2 class="section-title">Certifications</h2>
             </div>
             
@@ -531,55 +599,6 @@
                     </div>
                     <div class="list-right">
                         <a href="https://nptel.ac.in/noc/E_Certificate/NOC26CS88S25570050904568375" target="_blank" class="list-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="content-section">
-            <div class="section-header reveal">
-                <div class="section-separator">06 // TECHNICAL ARSENAL</div>
-                <h2 class="section-title">Skills</h2>
-            </div>
-            
-            <div class="skills-wrapper reveal">
-                <div class="skill-category">
-                    <h3>Programming</h3>
-                    <div class="skill-pill-group">
-                        <div class="skill-pill"><span>Python</span> <i class="fab fa-python"></i></div>
-                        <div class="skill-pill"><span>C++</span> <i class="fas fa-code"></i></div>
-                        <div class="skill-pill"><span>SQL</span> <i class="fas fa-database"></i></div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>AI/ML</h3>
-                    <div class="skill-pill-group">
-                        <div class="skill-pill"><span>TensorFlow</span> <i class="fas fa-brain"></i></div>
-                        <div class="skill-pill"><span>Keras</span> <i class="fas fa-layer-group"></i></div>
-                        <div class="skill-pill"><span>YOLO</span> <i class="fas fa-crosshairs"></i></div>
-                        <div class="skill-pill"><span>OpenCV</span> <i class="fas fa-camera"></i></div>
-                        <div class="skill-pill"><span>MediaPipe</span> <i class="fas fa-hand-sparkles"></i></div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Web & Tools</h3>
-                    <div class="skill-pill-group">
-                        <div class="skill-pill"><span>Flask</span> <i class="fas fa-server"></i></div>
-                        <div class="skill-pill"><span>GitHub</span> <i class="fab fa-github"></i></div>
-                        <div class="skill-pill"><span>Kaggle</span> <i class="fab fa-kaggle"></i></div>
-                        <div class="skill-pill"><span>Roboflow</span> <i class="fas fa-box-open"></i></div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Core Concepts</h3>
-                    <div class="skill-pill-group">
-                        <div class="skill-pill"><span>Data Science</span> <i class="fas fa-chart-bar"></i></div>
-                        <div class="skill-pill"><span>Deep Learning</span> <i class="fas fa-network-wired"></i></div>
-                        <div class="skill-pill"><span>Computer Vision</span> <i class="fas fa-eye"></i></div>
-                        <div class="skill-pill"><span>Large Language Models</span> <i class="fas fa-robot"></i></div>
                     </div>
                 </div>
             </div>
@@ -773,25 +792,14 @@
         const ctx = canvas.getContext("2d");
         const scrollTrack = document.getElementById("hero-scroll-track");
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
         const frameCount = 520;
         const images = [];
+        let lastDrawnFrameIndex = -1; 
 
-        // Preload Image Sequence
-        for(let i=1; i<=frameCount; i++) {
-            const img = new Image();
-            img.src = `frames/frame_${String(i).padStart(5,"0")}.png`;
-            images.push(img);
-        }
-
-        // Draw image mimicking 'background-size: cover'
+        // Draw image mimicking 'background-size: cover' but anchored right on mobile
         function drawImageCover(context, img) {
+            if (!img || !img.width || !img.height) return; // Safety check
+
             const canvasRatio = context.canvas.width / context.canvas.height;
             const imgRatio = img.width / img.height;
             let drawWidth, drawHeight, drawX, drawY;
@@ -804,10 +812,48 @@
             } else {
                 drawWidth = context.canvas.height * imgRatio;
                 drawHeight = context.canvas.height;
-                drawX = (context.canvas.width - drawWidth) / 2;
+                
+                // RIGHT ANCHOR FOR MOBILE
+                if (window.innerWidth <= 900) {
+                    drawX = context.canvas.width - drawWidth; 
+                } else {
+                    drawX = (context.canvas.width - drawWidth) / 2; // CENTER ANCHOR FOR DESKTOP
+                }
+                
                 drawY = 0;
             }
             context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Force redraw on resize so alignment stays correct immediately
+            if (lastDrawnFrameIndex >= 0 && images[lastDrawnFrameIndex] && images[lastDrawnFrameIndex].complete) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                drawImageCover(ctx, images[lastDrawnFrameIndex]);
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Preload Image Sequence
+        for(let i=1; i<=frameCount; i++) {
+            const img = new Image();
+            
+            // Explicitly draw the first frame the millisecond it loads to guarantee it's visible without scrolling
+            if (i === 1) {
+                img.onload = () => {
+                    if (currentScrollFrame < 1) {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        drawImageCover(ctx, img);
+                        lastDrawnFrameIndex = 0;
+                    }
+                };
+            }
+            
+            img.src = `frames/frame_${String(i).padStart(5,"0")}.png`;
+            images.push(img);
         }
 
         let currentScrollFrame = 0;
@@ -827,8 +873,6 @@
                 targetScrollFrame = 0;
             }
         });
-
-        let lastDrawnFrameIndex = -1; 
 
         function renderCanvas() {
             currentScrollFrame += (targetScrollFrame - currentScrollFrame) * 0.08;
