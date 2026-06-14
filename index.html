@@ -9,134 +9,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
     <style>
         /* =========================================
-           1. THEME VARIABLES (Multi-Shade System)
+           1. THEME VARIABLES (Monochrome Palette)
            ========================================= */
         :root {
             --transition-speed: 0.6s;
+            
+            --color-50: #F2F2F2;
+            --color-100: #DBDBDB;
+            --color-200: #C4C4C4;
+            --color-300: #ADADAD;
+            --color-400: #969696;
+            --color-500: #808080;
+            --color-600: #696969;
+            --color-700: #525252;
+            --color-800: #414141;
+            --color-900: #242424;
+            --color-950: #0D0D0D;
         }
 
-        /* --- DARK THEME (Earthy Gold Palette) --- */
         [data-theme="dark"] {
-            --color-50: #F5F4EF;
-            --color-100: #E3E0D3;
-            --color-200: #D1CCB7;
-            --color-300: #BFB89B;
-            --color-400: #ADA47F;
-            --color-500: #9C9063;
-            --color-600: #807652;
-            --color-700: #645C40;
-            --color-800: #45402C;
-            --color-900: #2C281C;
-            --color-950: #100E0A;
-
             --bg: var(--color-950);
-            --bg-secondary: var(--color-900);
-            --surface: rgba(69, 64, 44, 0.4);
+            --bg-secondary: rgba(36, 36, 36, 0.6); 
+            --surface: rgba(65, 65, 65, 0.4);
             --surface-hover: var(--color-800);
-            
             --border: var(--color-800);
             --border-hover: var(--color-500);
-            
             --text-primary: var(--color-50);
             --text-secondary: var(--color-200);
             --text-muted: var(--color-400);
-            
             --accent: var(--color-400);
-            --accent-glow: rgba(173, 164, 127, 0.15);
-            --gradient-accent: linear-gradient(135deg, rgba(156, 144, 99, 0.1) 0%, transparent 100%);
-            
-            --card-overlay: rgba(16, 14, 10, 0.85);
-            
-            --card-glass: linear-gradient(135deg, var(--color-800), var(--color-500), var(--color-100), var(--color-400), var(--color-600), var(--color-300), var(--color-700));
-            --chip-gradient: linear-gradient(135deg, var(--color-400), var(--color-100), var(--color-500));
+            --accent-glow: rgba(150, 150, 150, 0.15);
+            --gradient-accent: linear-gradient(135deg, rgba(150, 150, 150, 0.1) 0%, transparent 100%);
         }
 
-        /* --- LIGHT THEME (Mint/Teal Palette) --- */
         [data-theme="light"] {
-            --color-50: #ECF8F5;
-            --color-100: #CAECE3;
-            --color-200: #A8E1D1;
-            --color-300: #86D5C0;
-            --color-400: #64C9AE;
-            --color-500: #42BD9C;
-            --color-600: #369B80;
-            --color-700: #2A7964;
-            --color-800: #236352;
-            --color-900: #13352C;
-            --color-950: #071310;
-
             --bg: var(--color-50);
-            --bg-secondary: var(--color-100);
+            --bg-secondary: rgba(219, 219, 219, 0.6); 
             --surface: rgba(255, 255, 255, 0.6);
-            --surface-hover: var(--color-50);
-            
+            --surface-hover: var(--color-200);
             --border: var(--color-300);
             --border-hover: var(--color-600);
-            
             --text-primary: var(--color-950);
             --text-secondary: var(--color-800);
             --text-muted: var(--color-700);
-            
             --accent: var(--color-600);
-            --accent-glow: rgba(54, 155, 128, 0.2);
-            --gradient-accent: linear-gradient(135deg, rgba(100, 201, 174, 0.15) 0%, transparent 100%);
-            
-            --card-overlay: rgba(236, 248, 245, 0.85);
-            
-            --card-glass: linear-gradient(135deg, var(--color-300), var(--color-500), var(--color-50), var(--color-400), var(--color-200), var(--color-600), var(--color-100));
-            --chip-gradient: linear-gradient(135deg, var(--color-400), var(--color-100), var(--color-500));
-        }
-
-        /* --- GRAYSCALE AESTHETIC THEME --- */
-        [data-theme="gray"] {
-            --color-50: #FFFFFF;
-            --color-200: #CCCCCC;
-            --color-400: #999999;
-            --color-600: #666666;
-            --color-800: #333333;
-            --color-900: #1A1A1A;
-            --color-950: #000000;
-
-            --bg: var(--color-950);
-            --bg-secondary: var(--color-900);
-            --surface: rgba(51, 51, 51, 0.6);
-            --surface-hover: var(--color-800);
-            
-            --border: var(--color-600);
-            --border-hover: var(--color-50);
-            
-            --text-primary: var(--color-50);
-            --text-secondary: var(--color-400);
-            --text-muted: var(--color-600);
-            
-            --accent: var(--color-50);
-            --accent-glow: rgba(255, 255, 255, 0.15);
-            --gradient-accent: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
-            
-            --card-overlay: rgba(26, 26, 26, 0.85);
-            
-            --card-glass: linear-gradient(135deg, var(--color-600), var(--color-800), var(--color-50), var(--color-400), var(--color-900));
-            --chip-gradient: linear-gradient(135deg, var(--color-600), var(--color-200), var(--color-800));
+            --accent-glow: rgba(105, 105, 105, 0.2);
+            --gradient-accent: linear-gradient(135deg, rgba(105, 105, 105, 0.15) 0%, transparent 100%);
         }
 
         /* =========================================
-           2. GLOBAL STYLES & BACKGROUND
+           2. GLOBAL STYLES & BACKGROUND CANVAS
            ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; font-size: 14px; overflow-x: hidden; background-color: var(--bg); } 
-        
+        html { scroll-behavior: smooth; font-size: 14px; background-color: var(--bg); } 
         body { 
             background-color: var(--bg); 
             color: var(--text-primary); 
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1), color var(--transition-speed) ease;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        #bg-particles {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;
         }
 
         h1, h2, h3, h4, .brand { font-family: 'Clash Display', sans-serif; font-weight: 600; }
@@ -148,9 +86,6 @@
             opacity: 0.03; z-index: 9999; pointer-events: none; mix-blend-mode: overlay;
         }
 
-        #webgl-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-        .layout-wrapper { position: relative; z-index: 10; }
-
         /* =========================================
            3. NAVIGATION
            ========================================= */
@@ -158,200 +93,103 @@
             position: fixed; top: 0; width: 100%; padding: 1.5rem 6vw; display: flex; justify-content: space-between; align-items: center;
             z-index: 100; background: transparent; transition: all 0.4s ease; border-bottom: 1px solid transparent;
         }
-
         nav.scrolled {
             background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); padding: 1rem 6vw;
         }
-
         .brand { font-size: 1.5rem; letter-spacing: -0.02em; }
         .brand span { color: var(--accent); }
-
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); transition: color 0.3s ease; text-transform: uppercase; letter-spacing: 1px;}
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;}
         .nav-links a:hover { color: var(--text-primary); }
-
         .controls { display: flex; align-items: center; gap: 1.5rem; }
-        .theme-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem; transition: color 0.3s ease; }
+        .theme-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem; }
         .theme-btn:hover { color: var(--accent); }
-
         .cta-btn {
             background: var(--text-primary); color: var(--bg); padding: 0.6rem 1.2rem; border-radius: 6px;
-            font-size: 0.85rem; font-weight: 600; transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease; border: 1px solid var(--text-primary);
+            font-size: 0.85rem; font-weight: 600; border: 1px solid var(--text-primary);
         }
         .cta-btn:hover { background: transparent; color: var(--text-primary); }
 
         /* =========================================
-           4. HERO SECTION, HOLOGRAPHIC CARD & CONTROLS
+           4. PINNED HERO & CANVAS SCRUBBER
            ========================================= */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
-            padding: 120px 6vw 0 6vw; position: relative; gap: 4vw;
+        #hero-scroll-track { position: relative; height: 400vh; width: 100%; background-color: transparent; z-index: 5; }
+        .hero-sticky-container { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background-color: transparent; }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 100; pointer-events: none; }
+
+        .hero-layout {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 6vw; gap: 4vw; z-index: 10;
         }
         
-        .hero-content { width: 50%; z-index: 10; display: flex; flex-direction: column; gap: 1rem; }
-        
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: var(--surface);
-            border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text-secondary);
-            margin-bottom: 1rem; width: fit-content; text-transform: uppercase;
-        }
-        .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite;}
-
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: var(--text-primary); }
-        .hero h1 span { color: var(--text-secondary); font-style: italic; }
-
-        .hero p { font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; font-weight: 400; }
-
-        .hero-visual { width: 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; perspective: 2000px; z-index: 10; }
-        
-        .holo-card-container { 
-            width: 320px; 
-            height: 460px; 
-            position: relative; 
-            cursor: grab; 
-            touch-action: pan-y; 
-            transform-style: preserve-3d; 
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        .holo-card-container:active { cursor: grabbing; }
-        
-        .holo-card { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; }
-        .card-shadow { position: absolute; bottom: -30px; width: 80%; left: 10%; height: 20px; background: rgba(0,0,0,0.3); filter: blur(20px); border-radius: 50%; transition: 0.3s; }
-        
-        .card-layer {
-            position: absolute; width: 100%; height: 100%; border-radius: 12px;
-            background: var(--card-glass);
-            box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
-            transition: background var(--transition-speed) ease;
-        }
-
-        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--border); }
-        .card-face.front { transform: translateZ(6px); display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); }
-        .card-profile-img { width: 100%; height: 100%; object-fit: cover; background-color: var(--bg); }
-        
-        .card-face.back {
-            transform: rotateY(180deg) translateZ(6px); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
-            background-image: linear-gradient(var(--card-overlay), var(--card-overlay)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;
-            border: 1px solid var(--accent);
-        }
-
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .card-chip { width: 40px; height: 28px; border-radius: 4px; background: var(--chip-gradient); box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 0 5px rgba(255,255,255,0.3); transition: background var(--transition-speed) ease; }
-        
-        .card-contact { font-size: 1.5rem; color: var(--accent); }
-        .card-bottom-info { margin-top: auto; }
-        .card-name { font-family: 'Clash Display', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 0.2rem; }
-        .card-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-        .card-barcode { font-size: 2.5rem; color: var(--text-primary); opacity: 0.8; margin-top: 15px; }
-
-        /* VISUAL CONTROLS UNDER CARD */
-        .visual-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 40px;
-            z-index: 20;
-        }
-
-        .drag-hint { 
-            font-size: 0.75rem; 
-            color: var(--text-secondary); 
-            letter-spacing: 2px; 
-            font-family: monospace; 
-            animation: pulse 2s infinite; 
-            pointer-events: none; 
-        }
-
-        .scroll-indicator {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            animation: bounce-local 2s infinite;
-        }
-
-        .scroll-indicator:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
+        .hero-content { width: 50%; display: flex; flex-direction: column; gap: 1rem; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: var(--surface); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text-secondary); width: fit-content; text-transform: uppercase; }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite; }
+        .hero-layout h1 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .hero-layout h1 span { color: var(--text-secondary); font-style: italic; }
+        .hero-layout p { font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; font-weight: 400; }
 
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
-        
-        @keyframes bounce-local {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
-        }
 
         /* =========================================
-           5. SECTION LAYOUTS & STRUCTURE
+           5. SECTION LAYOUTS
            ========================================= */
-        section.content-section { padding: 8vw 6vw; border-top: 1px solid var(--border); }
+        section.content-section { 
+            padding: 8vw 6vw; border-top: 1px solid var(--border); position: relative; z-index: 20; background: transparent; 
+        }
         
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+        .section-header { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 4rem; gap: 0.5rem; }
+        .section-separator { font-family: monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; }
         .section-title { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.02em; color: var(--text-primary); }
-        .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 400px; text-align: right; }
 
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
-        
-        .project-card {
-            background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%;
+        /* GRID CARDS (Projects) */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .project-card { 
+            background: var(--bg-secondary); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%; 
         }
-
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gradient-accent);
-            opacity: 0; transition: opacity 0.5s ease; z-index: 0; pointer-events: none;
-        }
-
+        .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gradient-accent); opacity: 0; transition: opacity 0.5s ease; z-index: 0; pointer-events: none; }
         .project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .project-card:hover::before { opacity: 1; }
-
         .project-content { position: relative; z-index: 1; flex-grow: 1; display: flex; flex-direction: column; }
-        
         .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); background: var(--bg); }
-        
-        .project-title { font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; color: var(--text-primary); }
+        .project-title { font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.3;}
         .project-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; line-height: 1.6; }
-        
         .project-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-top: auto; width: fit-content; transition: gap 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
         .project-link:hover { gap: 0.8rem; color: var(--accent); }
 
+        /* LIST LAYOUT (Experience, Education, Leadership, Certs) */
         .list-container { display: flex; flex-direction: column; }
-        
-        .list-item { display: grid; grid-template-columns: 1fr 2fr 1fr; padding: 2.5rem 0; border-bottom: 1px solid var(--border); transition: background 0.3s ease; }
-        .list-item:hover { background: var(--surface); padding-left: 1rem; padding-right: 1rem; margin-left: -1rem; margin-right: -1rem; border-radius: 8px; border-bottom-color: transparent; }
-        
+        .list-item { display: grid; grid-template-columns: 1.2fr 2fr 1fr; padding: 2.5rem 1rem; border-bottom: 1px solid var(--border); transition: background 0.3s ease, border-radius 0.3s; gap: 1.5rem; }
+        .list-item:hover { background: var(--surface); backdrop-filter: blur(8px); border-radius: 8px; border-bottom-color: transparent; }
         .list-meta { color: var(--accent); font-size: 0.9rem; font-family: monospace; font-weight: 600; text-transform: uppercase;}
         .list-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem; }
         .list-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.8rem; font-weight: 500; }
         .list-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
-        
         .list-right { text-align: right; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; }
-        .list-link { font-size: 0.8rem; border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 4px; transition: all 0.3s ease; color: var(--text-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+        .list-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 4px; transition: all 0.3s ease; color: var(--text-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;}
         .list-link:hover { border-color: var(--accent); color: var(--accent); }
 
-        .skills-container { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .skill-pill { font-size: 1rem; font-family: 'Clash Display', sans-serif; font-weight: 500; padding: 0.8rem 1.8rem; border: 1px solid var(--border); border-radius: 100px; background: var(--bg-secondary); transition: all 0.3s ease; color: var(--text-primary); }
-        .skill-pill:hover { border-color: var(--accent); background: var(--surface-hover); color: var(--accent); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
+        /* SKILLS LAYOUT */
+        .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .skill-category h3 { color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; }
+        .skill-pill-group { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-pill { display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.2rem; border: 1px solid var(--border); border-radius: 100px; background: var(--bg-secondary); backdrop-filter: blur(8px); transition: all 0.3s ease; color: var(--text-secondary); }
+        .skill-pill i { color: var(--accent); font-size: 1.1rem; }
+        .skill-pill:hover { border-color: var(--accent); background: var(--surface-hover); color: var(--text-primary); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
 
         /* =========================================
-           6. PREMIUM FOOTER
+           6. STANDARD PREMIUM FOOTER
            ========================================= */
-        .premium-footer { position: relative; padding: 8vw 8vw 3vw; background: var(--bg-secondary); border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; }
-        .footer-massive-text { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1px var(--border); margin-bottom: 4vw; background: linear-gradient(to bottom, var(--text-primary) 0%, transparent 100%); -webkit-background-clip: text; text-align: center; }
+        .premium-footer { 
+            position: relative; width: 100%; padding: 8vw 6vw 3vw; background: var(--bg-secondary); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20;
+        }
+        .footer-massive-text { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1px var(--border); margin-bottom: 4vw; background: linear-gradient(to bottom, var(--text-primary) 0%, transparent 100%); -webkit-background-clip: text; text-align: center; transition: all 0.5s ease; }
+        .premium-footer:hover .footer-massive-text { -webkit-text-stroke: 1px var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+        
         .footer-content { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; width: 100%; }
         .footer-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
         .footer-links a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); color: var(--text-primary); font-size: 1rem; background: var(--bg); transition: all 0.3s ease; }
@@ -369,343 +207,408 @@
 
         @media (max-width: 900px) {
             .nav-links { display: none; }
-            
-            .hero { 
-                flex-direction: column; 
-                justify-content: center; 
-                align-items: center;
-                padding-top: 100px; 
-                padding-bottom: 60px;
-                text-align: center; 
-            }
-            .hero-content { display: contents; }
-            
-            .hero-badge { order: 1; margin: 0 auto 1.5rem auto; }
-            .hero-visual { order: 2; width: 100%; margin-bottom: 2rem; }
-            .hero h1 { order: 3; margin-bottom: 1rem; }
-            .hero p { order: 4; margin: 0 auto 2rem auto; }
-
-            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .section-desc { text-align: left; }
+            .hero-layout { flex-direction: column; justify-content: center; text-align: left; padding-top: 100px;}
+            .hero-content { width: 100%; margin-bottom: 2rem; }
             .list-item { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
             .list-right { text-align: left; align-items: flex-start; flex-direction: row; gap: 15px;}
             .projects-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
         }
+
+        /* Specific Dark Theme Overrides */
+        [data-theme="dark"] .hero-layout h1 { color: #2e2c2c; }
+        [data-theme="dark"] .hero-layout h1 span { color: #525354; }
+        [data-theme="dark"] .hero-layout p { color: #8d8d8d; }
+        [data-theme="dark"] nav:not(.scrolled) .nav-links a,
+        [data-theme="dark"] nav:not(.scrolled) .brand,
+        [data-theme="dark"] nav:not(.scrolled) .theme-btn { color: #0D0D0D; }
+        [data-theme="dark"] nav:not(.scrolled) .cta-btn { background: #0D0D0D; color: white; border-color: #0D0D0D; }
+        [data-theme="dark"] nav.scrolled .nav-links a,
+        [data-theme="dark"] nav.scrolled .brand,
+        [data-theme="dark"] nav.scrolled .theme-btn { color: var(--text-secondary); }
+        [data-theme="dark"] nav.scrolled .cta-btn { background: var(--text-primary); color: var(--bg); }
     </style>
 </head>
 <body>
 
     <div class="noise-overlay"></div>
-    <div id="webgl-container"></div>
+    <canvas id="bg-particles"></canvas>
 
-    <div class="layout-wrapper">
-        
-        <nav id="navbar">
-            <a href="#" class="brand">Jeet<span>.</span></a>
-            <div class="nav-links">
-                <a href="#projects">Work</a>
-                <a href="#experience">Experience</a>
-                <a href="#education">Education</a>
-                <a href="#skills">Skills</a>
-            </div>
-            <div class="controls">
-                <button class="theme-btn" id="themeToggle" aria-label="Toggle Theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <a href="mailto:thejeetbhardwaj@gmail.com" class="cta-btn">Contact</a>
-            </div>
-        </nav>
+    <nav id="navbar">
+        <a href="#" class="brand">Jeet<span>.</span></a>
+        <div class="nav-links">
+            <a href="#projects">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#achievements">Leadership</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#skills">Skills</a>
+        </div>
+        <div class="controls">
+            <button class="theme-btn" id="themeToggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="mailto:thejeetbhardwaj@gmail.com" class="cta-btn">Contact</a>
+        </div>
+    </nav>
 
-        <main>
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="hero-badge reveal">
-                        <div class="dot"></div> System Online & Learning
-                    </div>
-                    <h1 class="reveal" style="transition-delay: 0.1s;">Training machines to think,<br>while learning how to <span>rethink.</span></h1>
-                    <p class="reveal" style="transition-delay: 0.2s;">AI & Data Science Engineer specialized in Computer Vision, Deep Learning, and highly optimized inference systems.</p>
-                </div>
+    <main>
+        <section id="hero-scroll-track">
+            <div class="hero-sticky-container">
+                <canvas id="hero-canvas"></canvas>
                 
-                <div class="hero-visual reveal" style="transition-delay: 0.3s;">
-                    <div class="holo-card-container" id="holo-card-container">
-                        <div class="card-shadow"></div>
-                        <div class="holo-card" id="holo-card">
-                            <div class="card-layer" style="transform: translateZ(5px)"></div>
-                            <div class="card-layer" style="transform: translateZ(4px)"></div>
-                            <div class="card-layer" style="transform: translateZ(3px)"></div>
-                            <div class="card-layer" style="transform: translateZ(2px)"></div>
-                            <div class="card-layer" style="transform: translateZ(1px)"></div>
-                            <div class="card-layer" style="transform: translateZ(0px)"></div>
-                            <div class="card-layer" style="transform: translateZ(-1px)"></div>
-                            <div class="card-layer" style="transform: translateZ(-2px)"></div>
-                            <div class="card-layer" style="transform: translateZ(-3px)"></div>
-                            <div class="card-layer" style="transform: translateZ(-4px)"></div>
-                            <div class="card-layer" style="transform: translateZ(-5px)"></div>
-
-                            <div class="card-face front">
-                                <img src="j.png" alt="Jeet Bhardwaj" class="card-profile-img" draggable="false" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'">
-                            </div>
-
-                            <div class="card-face back">
-                                <div class="card-header">
-                                    <div class="card-chip"></div>
-                                    <i class="fas fa-fingerprint card-contact"></i>
-                                </div>
-                                <div class="card-bottom-info">
-                                    <h2 class="card-name">JEET<br>BHARDWAJ</h2>
-                                    <div class="card-title">AI & Data Science Engineer</div>
-                                    <div style="margin-top: 15px; font-family: monospace; font-size: 0.7rem; color: var(--text-secondary); font-weight: 600;">
-                                        <span style="color: var(--accent);">EMAIL:</span> thejeetbhardwaj@gmail.com<br>
-                                        <span style="color: var(--accent);">ACCESS:</span> GRANTED
-                                    </div>
-                                    <div class="card-barcode"><i class="fas fa-barcode"></i></div>
-                                </div>
-                            </div>
+                <div class="hero-layout">
+                    <div class="hero-content reveal">
+                        <div class="hero-badge">
+                            <div class="dot"></div> System Online & Learning
                         </div>
-                    </div>
-                    
-                    <div class="visual-controls">
-                        <div class="drag-hint">DRAG TO ROTATE</div>
-                        <div class="scroll-indicator" id="scroll-arrow" aria-label="Scroll Down">
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section id="projects" class="content-section">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Selected Build Systems</h2>
-                    <p class="section-desc">A collection of research, engineering, and optimized machine learning pipelines.</p>
-                </div>
-
-                <div class="projects-grid">
-                    <div class="project-card reveal">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Computer Vision</span><span class="tag">MediaPipe</span><span class="tag">Real-Time</span>
-                            </div>
-                            <h3 class="project-title">Real-Time Drowsiness Detection</h3>
-                            <p class="project-desc">Engineered a highly performant driver safety system. Successfully transitioned from computationally heavy deep learning models to a lightning-fast real-time architecture utilizing the MediaPipe Tasks API for precise eye-aspect ratio tracking.</p>
-                            <a href="#" class="project-link">Architecture Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal" style="transition-delay: 0.1s;">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Digital Forensics</span><span class="tag">FaceForensics++</span>
-                            </div>
-                            <h3 class="project-title">Deepfake Forensics Engine</h3>
-                            <p class="project-desc">Advanced tampering detection pipeline trained on FaceForensics++ and FakeAVCeleb datasets. Architected strictly for visual signal inconsistencies and spatial artifacts to maximize inference speed.</p>
-                            <a href="#" class="project-link">View Research <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Generative AI</span><span class="tag">GANs</span>
-                            </div>
-                            <h3 class="project-title">AnimeGen</h3>
-                            <p class="project-desc">A research-oriented, high-fidelity image-to-anime generator. Built utilizing custom Generative Adversarial Network architectures and Canny-edge stencils for structural preservation.</p>
-                            <a href="https://thejeetbhardwaj-animegen.hf.space/" target="_blank" class="project-link">Live Deployment <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal" style="transition-delay: 0.1s;">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">Algorithms</span><span class="tag">Flask</span>
-                            </div>
-                            <h3 class="project-title">GeekFusion 2026 Engine</h3>
-                            <p class="project-desc">A robust evaluation normalization framework developed for MITS Gwalior. Features hardcoded algorithmic weights for technical, GD, and HR rounds, standardizing metrics on a strict 1-10 scale.</p>
-                            <a href="#" class="project-link">View Logic <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">NLP</span><span class="tag">Word2Vec</span><span class="tag">PCA</span>
-                            </div>
-                            <h3 class="project-title">Vector Embedding Explorer</h3>
-                            <p class="project-desc">Interactive analytical tool engineered to parse, extract, and visualize high-dimensional word embeddings from PDF documents using Word2Vec and PCA dimensionality reduction.</p>
-                            <a href="https://thejeetbhardwaj-vectorembeddingexplorer.hf.space/" target="_blank" class="project-link">Explore Data <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="project-card reveal" style="transition-delay: 0.1s;">
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="tag">YOLOv8</span><span class="tag">CUDA</span><span class="tag">Automation</span>
-                            </div>
-                            <h3 class="project-title">Autonomous Gameplay Bot</h3>
-                            <p class="project-desc">An autonomous, GPU-accelerated AI bot developed to master Fruit Ninja. Utilizes YOLOv8 for rapid object detection and OpenCV for precise trajectory calculation.</p>
-                            <a href="https://github.com/GitHub-JeetBhardwaj/FruitNinja-AIBot" target="_blank" class="project-link">View Source <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                        <h1>Training machines to think,<br>while learning how to <span>rethink.</span></h1>
+                        <p>AI & Data Science Engineer specialized in Computer Vision, Deep Learning, and highly optimized inference systems.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="experience" class="content-section">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Professional Logs</h2>
-                </div>
-                <div class="list-container">
-                    <div class="list-item reveal">
-                        <div class="list-meta">2024 — Present</div>
-                        <div>
-                            <h3 class="list-title">AI Intern</h3>
-                            <div class="list-subtitle">Microsoft, SAP & AICTE Internship</div>
-                            <p class="list-desc">Developed 'PoseEstimator', a real-time human pose detection system utilizing Flask, OpenCV, and MediaPipe. Tailored custom pose analytics for fitness and sports applications.</p>
-                        </div>
-                        <div class="list-right">
-                            <span style="color: var(--text-muted); font-size: 0.85rem;">Remote, IN</span>
-                            <a href="https://techsaksham.org/verify-aicte-certificate/TSPIN24_610228" target="_blank" class="list-link">Verify</a>
-                        </div>
-                    </div>
-                    
-                    <div class="list-item reveal">
-                        <div class="list-meta">2024 — 2025</div>
-                        <div>
-                            <h3 class="list-title">Leadership & Operations</h3>
-                            <div class="list-subtitle">MITS Gwalior</div>
-                            <p class="list-desc">Served as Student Coordinator for the Training & Placement Cell, Competitive Programming Coordinator, and Data Co-Head for SIH 2025 internal datasets managing participant evaluation frameworks.</p>
-                        </div>
-                        <div class="list-right">
-                            <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior, IN</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="education" class="content-section">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Academic Data</h2>
-                </div>
-                <div class="list-container">
-                    <div class="list-item reveal">
-                        <div class="list-meta">2023 — 2027</div>
-                        <div>
-                            <h3 class="list-title">B.Tech in Artificial Intelligence & Data Science</h3>
-                            <div class="list-subtitle">Madhav Institute of Technology and Science</div>
-                            <p class="list-desc">CGPA: 9.10. Awarded Best Research Paper at the 2026 International Conference (Scopus-Indexed) for advancements in AI and Computer Vision.</p>
-                        </div>
-                        <div class="list-right">
-                            <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior, IN</span>
-                        </div>
-                    </div>
-
-                    <div class="list-item reveal">
-                        <div class="list-meta">Sep 2024 — Apr 2025</div>
-                        <div>
-                            <h3 class="list-title">BS in Data Science (Foundation Level)</h3>
-                            <div class="list-subtitle">IIT Madras</div>
-                            <p class="list-desc">Grade: 8.25. Rigorous remote program focusing on mathematics, statistics, and foundational data methodologies.</p>
-                        </div>
-                        <div class="list-right">
-                            <span style="color: var(--text-muted); font-size: 0.85rem;">Remote</span>
-                            <a href="https://ds.study.iitm.ac.in/document_verification/41ba2ce7bfc6da7866322b24418f9dcda5acc1d00ed694851ee1fbae5aeb9af5" target="_blank" class="list-link">Verify</a>
-                        </div>
-                    </div>
-                    
-                    <div class="list-item reveal">
-                        <div class="list-meta">2026</div>
-                        <div>
-                            <h3 class="list-title">Graduate Aptitude Test in Engineering 2026</h3>
-                            <div class="list-subtitle">GATE (Data Science) Qualified</div>
-                        </div>
-                        <div class="list-right">
-                            <span style="color: var(--text-muted); font-size: 0.85rem;">National</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="certifications" class="content-section">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Key Certifications</h2>
-                </div>
-                <div class="list-container">
-                    <div class="list-item reveal">
-                        <div class="list-meta">NPTEL Swayam</div>
-                        <div>
-                            <h3 class="list-title">Cognitive Robotics & Large Language Models</h3>
-                            <div class="list-subtitle">IIT Madras</div>
-                            <p class="list-desc">Foundation of Cognitive Robotics and Introduction to LLMs deep-dive courses.</p>
-                        </div>
-                        <div class="list-right">
-                            <a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/112/noc24-me82/Course/NPTEL24ME82S43620029202618070.pdf" target="_blank" class="list-link">View Robotics</a>
-                        </div>
-                    </div>
-
-                    <div class="list-item reveal">
-                        <div class="list-meta">NPTEL Swayam</div>
-                        <div>
-                            <h3 class="list-title">Cyber Security, Privacy & Ethical Hacking</h3>
-                            <div class="list-subtitle">IIT Madras & IIT Kharagpur</div>
-                            <p class="list-desc">Advanced systems security, digital privacy mechanisms, and ethical hacking protocols.</p>
-                        </div>
-                        <div class="list-right">
-                            <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS116S65760059110548024" target="_blank" class="list-link">View Cyber</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="skills" class="content-section">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Technical Arsenal</h2>
-                </div>
-                <div class="skills-container reveal">
-                    <div class="skill-pill">Python</div>
-                    <div class="skill-pill">C++</div>
-                    <div class="skill-pill">SQL</div>
-                    <div class="skill-pill">TensorFlow</div>
-                    <div class="skill-pill">Keras</div>
-                    <div class="skill-pill">PyTorch</div>
-                    <div class="skill-pill">YOLO</div>
-                    <div class="skill-pill">OpenCV</div>
-                    <div class="skill-pill">MediaPipe</div>
-                    <div class="skill-pill">Generative AI</div>
-                    <div class="skill-pill">Computer Vision</div>
-                    <div class="skill-pill">Flask</div>
-                    <div class="skill-pill">LaTeX</div>
-                    <div class="skill-pill">GitHub</div>
-                    <div class="skill-pill">Kaggle</div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="premium-footer">
-            <div class="footer-massive-text reveal">JEET BHARDWAJ</div>
+        <section id="projects" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">01 // BUILD SYSTEMS</div>
+                <h2 class="section-title">Projects</h2>
+            </div>
             
-            <div class="footer-content reveal" style="transition-delay: 0.1s;">
-                <div class="footer-links">
-                    <a href="https://github.com/GitHub-JeetBhardwaj" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/thejeetbhardwaj" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://huggingface.co/TheJeetBhardwaj" target="_blank" aria-label="HuggingFace"><i class="fas fa-cube"></i></a>
-                    <a href="https://leetcode.com/u/Jeet_Bhardwaj_07/" target="_blank" aria-label="LeetCode"><i class="fas fa-code"></i></a>
-                    <a href="mailto:thejeetbhardwaj@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-                
-                <div class="footer-bottom">
-                    <div class="footer-status">
-                        <div class="status-dot"></div>
-                        SYSTEM ONLINE // GWALIOR, INDIA
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">NLP</span><span class="tag">Word2Vec</span><span class="tag">Flask</span>
+                        </div>
+                        <h3 class="project-title">Vector Embedding Explorer</h3>
+                        <p class="project-desc">Interactive tool to explore word embeddings from PDF documents using Word2Vec and PCA visualization.</p>
+                        <a href="https://thejeetbhardwaj-vectorembeddingexplorer.hf.space/" target="_blank" class="project-link">View on Hugging Face <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="copyright">&copy; 2026 JEET BHARDWAJ. ALL RIGHTS RESERVED.</div>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Computer Vision</span><span class="tag">YOLOv8</span><span class="tag">CUDA</span>
+                        </div>
+                        <h3 class="project-title">AI Bot for Automated-Gameplay</h3>
+                        <p class="project-desc">Built an autonomous AI bot to master Fruit Ninja Game using Python, YOLOv8, and OpenCV with GPU acceleration.</p>
+                        <a href="https://github.com/GitHub-JeetBhardwaj/FruitNinja-AIBot" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Deep Learning</span><span class="tag">CNN</span>
+                        </div>
+                        <h3 class="project-title">Age & Gender Recognition System</h3>
+                        <p class="project-desc">Developed an end-to-end Deep Learning application using CNNs to predict age and gender from images.</p>
+                        <a href="https://gender-age-web.vercel.app/" target="_blank" class="project-link">Live Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">MediaPipe</span><span class="tag">OpenCV</span>
+                        </div>
+                        <h3 class="project-title">Real Time Pose Estimator</h3>
+                        <p class="project-desc">Created a web-based human pose estimation tool using Mediapipe and OpenCV. Accurately detects body landmarks.</p>
+                        <a href="https://github.com/GitHub-JeetBhardwaj/PoseEstimator" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">GAN</span><span class="tag">Deep Learning</span>
+                        </div>
+                        <h3 class="project-title">Image-to-Anime Translation System</h3>
+                        <p class="project-desc">Developed a AI anime generation system to transform real-world images into anime-style visuals by training a deep learning model.</p>
+                        <a href="https://thejeetbhardwaj-animegen.hf.space/" target="_blank" class="project-link">Live Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">GAN</span><span class="tag">OpenCV</span>
+                        </div>
+                        <h3 class="project-title">Low-Light Image Enhancer</h3>
+                        <p class="project-desc">Developed a GAN-based low-light image enhancement system with histogram equalization to improve image visibility and contrast.</p>
+                        <a href="https://thejeetbhardwaj-lumina.hf.space/" target="_blank" class="project-link">Live Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </section>
+
+        <section id="experience" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">02 // PROFESSIONAL LOGS</div>
+                <h2 class="section-title">Experience</h2>
+            </div>
+            
+            <div class="list-container">
+                <div class="list-item reveal">
+                    <div class="list-meta">Present</div>
+                    <div>
+                        <h3 class="list-title">AI Intern</h3>
+                        <div class="list-subtitle">Microsoft, SAP, & AICTE Internship</div>
+                        <p class="list-desc">Developed 'PoseEstimator', a real-time human pose detection system using Flask, OpenCV, and MediaPipe. Tailored custom pose analytics for fitness and sports applications.</p>
+                    </div>
+                    <div class="list-right">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Remote, India</span>
+                        <a href="https://techsaksham.org/verify-aicte-certificate/TSPIN24_610228" target="_blank" class="list-link">Verify Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">03 // ACADEMIC DATA</div>
+                <h2 class="section-title">Education</h2>
+            </div>
+            
+            <div class="list-container">
+                <div class="list-item reveal">
+                    <div class="list-meta">2023 — 2027</div>
+                    <div>
+                        <h3 class="list-title">B.Tech in Artificial Intelligence & Data Science</h3>
+                        <div class="list-subtitle">Madhav Institute of Technology and Science</div>
+                        <p class="list-desc">CGPA: 9.10</p>
+                    </div>
+                    <div class="list-right">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior</span>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">Sep 2024 — Apr 2025</div>
+                    <div>
+                        <h3 class="list-title">BS in Data Science (Foundation Level)</h3>
+                        <div class="list-subtitle">IIT Madras</div>
+                        <p class="list-desc">Grade: 8.25</p>
+                    </div>
+                    <div class="list-right">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Remote</span>
+                        <a href="https://ds.study.iitm.ac.in/document_verification/41ba2ce7bfc6da7866322b24418f9dcda5acc1d00ed694851ee1fbae5aeb9af5" target="_blank" class="list-link">Verify Credential <i class="fas fa-check-circle"></i></a>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">2026</div>
+                    <div>
+                        <h3 class="list-title">Graduate Aptitude Test in Engineering 2026</h3>
+                        <div class="list-subtitle">GATE (Data Science) Qualified</div>
+                        <p class="list-desc">Qualified</p>
+                    </div>
+                    <div class="list-right">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">National</span>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">2021 — 2022</div>
+                    <div>
+                        <h3 class="list-title">Higher Secondary</h3>
+                        <div class="list-subtitle">Khushhal Vidya Peeth</div>
+                        <p class="list-desc">Percentage: 91%</p>
+                    </div>
+                    <div class="list-right">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Gwalior</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">04 // LEADERSHIP</div>
+                <h2 class="section-title">Academic & Leadership Achievements</h2>
+            </div>
+            
+            <div class="list-container">
+                <div class="list-item reveal">
+                    <div class="list-meta">Aug 2024 — Aug 2025</div>
+                    <div>
+                        <h3 class="list-title">Student Coordinator (Training & Placement Cell)</h3>
+                        <div class="list-subtitle">MITS, Gwalior</div>
+                        <p class="list-desc">Student Representative in Training and Placement.</p>
+                    </div>
+                    <div class="list-right"></div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">Oct 2024 — Present</div>
+                    <div>
+                        <h3 class="list-title">Competitive Programming Coordinator</h3>
+                        <div class="list-subtitle">MITS, Gwalior</div>
+                        <p class="list-desc">Organizing coding contests and mentoring peers.</p>
+                    </div>
+                    <div class="list-right"></div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">Aug 2025 — Present</div>
+                    <div>
+                        <h3 class="list-title">Coordinator for Outcome-Based Education</h3>
+                        <div class="list-subtitle">MITS, Gwalior</div>
+                        <p class="list-desc">Managing student performance data and curriculum mapping.</p>
+                    </div>
+                    <div class="list-right"></div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">Aug 2025 — Sep 2025</div>
+                    <div>
+                        <h3 class="list-title">Data and Operations Co-Head — SIH 2025</h3>
+                        <div class="list-subtitle">MITS, Gwalior</div>
+                        <p class="list-desc">Managed participant datasets for Smart India Hackathon internal round.</p>
+                    </div>
+                    <div class="list-right"></div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">2026</div>
+                    <div>
+                        <h3 class="list-title">Best Research Paper Award — International Conference 2026</h3>
+                        <div class="list-subtitle">Anurag University</div>
+                        <p class="list-desc">Presented a research paper in the field of AI and Computer Vision at International Conference (Scopus-Indexed) and received the best research paper award.</p>
+                    </div>
+                    <div class="list-right"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">05 // CERTIFICATIONS</div>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            
+            <div class="list-container">
+                <div class="list-item reveal">
+                    <div class="list-meta">NPTEL Swayam</div>
+                    <div>
+                        <h3 class="list-title">Foundation of Cognitive Robotics</h3>
+                        <div class="list-subtitle">IIT Madras</div>
+                    </div>
+                    <div class="list-right">
+                        <a href="https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/112/noc24-me82/Course/NPTEL24ME82S43620029202618070.pdf" target="_blank" class="list-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">NPTEL Swayam</div>
+                    <div>
+                        <h3 class="list-title">Cyber Security & Privacy</h3>
+                        <div class="list-subtitle">IIT Madras</div>
+                    </div>
+                    <div class="list-right">
+                        <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS116S65760059110548024" target="_blank" class="list-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">NPTEL Swayam</div>
+                    <div>
+                        <h3 class="list-title">Ethical Hacking</h3>
+                        <div class="list-subtitle">IIT Kharagpur</div>
+                    </div>
+                    <div class="list-right">
+                        <a href="https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL25CS142S95760009310548024" target="_blank" class="list-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="list-item reveal">
+                    <div class="list-meta">NPTEL Swayam</div>
+                    <div>
+                        <h3 class="list-title">Introduction to Large Language Model</h3>
+                        <div class="list-subtitle">IIT Madras</div>
+                    </div>
+                    <div class="list-right">
+                        <a href="https://nptel.ac.in/noc/E_Certificate/NOC26CS88S25570050904568375" target="_blank" class="list-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="content-section">
+            <div class="section-header reveal">
+                <div class="section-separator">06 // TECHNICAL ARSENAL</div>
+                <h2 class="section-title">Skills</h2>
+            </div>
+            
+            <div class="skills-wrapper reveal">
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Python</span> <i class="fab fa-python"></i></div>
+                        <div class="skill-pill"><span>C++</span> <i class="fas fa-code"></i></div>
+                        <div class="skill-pill"><span>SQL</span> <i class="fas fa-database"></i></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>AI/ML</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>TensorFlow</span> <i class="fas fa-brain"></i></div>
+                        <div class="skill-pill"><span>Keras</span> <i class="fas fa-layer-group"></i></div>
+                        <div class="skill-pill"><span>YOLO</span> <i class="fas fa-crosshairs"></i></div>
+                        <div class="skill-pill"><span>OpenCV</span> <i class="fas fa-camera"></i></div>
+                        <div class="skill-pill"><span>MediaPipe</span> <i class="fas fa-hand-sparkles"></i></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Web & Tools</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Flask</span> <i class="fas fa-server"></i></div>
+                        <div class="skill-pill"><span>GitHub</span> <i class="fab fa-github"></i></div>
+                        <div class="skill-pill"><span>Kaggle</span> <i class="fab fa-kaggle"></i></div>
+                        <div class="skill-pill"><span>Roboflow</span> <i class="fas fa-box-open"></i></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Concepts</h3>
+                    <div class="skill-pill-group">
+                        <div class="skill-pill"><span>Data Science</span> <i class="fas fa-chart-bar"></i></div>
+                        <div class="skill-pill"><span>Deep Learning</span> <i class="fas fa-network-wired"></i></div>
+                        <div class="skill-pill"><span>Computer Vision</span> <i class="fas fa-eye"></i></div>
+                        <div class="skill-pill"><span>Large Language Models</span> <i class="fas fa-robot"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="premium-footer">
+        <div class="footer-massive-text reveal">JEET BHARDWAJ</div>
+        <div class="footer-content reveal" style="transition-delay: 0.1s;">
+            <div class="footer-links">
+                <a href="https://github.com/GitHub-JeetBhardwaj" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/thejeetbhardwaj" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://huggingface.co/TheJeetBhardwaj" target="_blank" aria-label="HuggingFace"><i class="fas fa-cube"></i></a>
+                <a href="https://leetcode.com/u/Jeet_Bhardwaj_07/" target="_blank" aria-label="LeetCode"><i class="fas fa-code"></i></a>
+                <a href="mailto:thejeetbhardwaj@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-status">
+                    <div class="status-dot"></div>
+                    SYSTEM ONLINE // GWALIOR, INDIA
+                </div>
+                <div class="copyright">&copy; 2026 JEET BHARDWAJ. ALL RIGHTS RESERVED.</div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // --- 1. THEME SWITCHER LOGIC ---
-        const themes = ['dark', 'light', 'gray'];
+        const themes = ['dark', 'light'];
         let currentThemeIndex = 0; 
         const htmlElement = document.documentElement;
         const themeBtn = document.getElementById('themeToggle');
@@ -723,165 +626,226 @@
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('portfolio-theme', newTheme);
             updateThemeIcon();
-            updateThreeJSColors(newTheme);
+            updateParticleColors();
         });
 
         function updateThemeIcon() {
             const theme = themes[currentThemeIndex];
             if (theme === 'light') themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            else if (theme === 'dark') themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            else themeBtn.innerHTML = '<i class="fas fa-adjust"></i>';
+            else themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
         }
 
-        // --- 2. SMOOTH 3D LERP CARD LOGIC (UPDATED FOR SCROLL FIX) ---
-        const cardContainer = document.getElementById('holo-card-container');
-        const card = document.getElementById('holo-card');
+        // --- 2. 2D BACKGROUND PARTICLE NETWORK LOGIC ---
+        const bgCanvas = document.getElementById("bg-particles");
+        const bgCtx = bgCanvas.getContext("2d");
+        
+        let particlesArray = [];
+        let particleColor = 'rgba(255, 255, 255, 0.15)'; 
 
-        let isDragging = false;
-        let startX = 0;
-        let startRotY = 0;
-        let targetRotY = 0;
-        let currentRotY = 0;
+        function updateParticleColors() {
+            const theme = htmlElement.getAttribute('data-theme');
+            particleColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+        }
+        updateParticleColors();
 
-        // Added passive: true so the browser knows JS won't prevent native scrolling
-        cardContainer.addEventListener('pointerdown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-            startRotY = targetRotY;
-            cardContainer.style.cursor = 'grabbing';
-            // Removed setPointerCapture so native mobile scroll doesn't get "stolen"
-        }, { passive: true });
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
 
-        window.addEventListener('pointermove', (e) => {
-            if (!isDragging) return;
-            const deltaX = e.clientX - startX;
+        window.addEventListener('resize', () => {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+            }
+            draw() {
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                bgCtx.fillStyle = particleColor;
+                bgCtx.fill();
+            }
+            update() {
+                if (this.x > bgCanvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > bgCanvas.height || this.y < 0) this.directionY = -this.directionY;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                if (distance < mouse.radius) {
+                    this.x -= dx/20;
+                    this.y -= dy/20;
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (bgCanvas.height * bgCanvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5;
+                let directionY = (Math.random() * 1) - 0.5;
+                particlesArray.push(new Particle(x, y, directionX, directionY, size));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            bgCtx.clearRect(0, 0, innerWidth, innerHeight);
             
-            // Restrict rotation to the Y-axis ONLY (left/right drag)
-            // This prevents the card from fighting with vertical scrolling (up/down drag)
-            targetRotY = startRotY + (deltaX * 0.5); 
-        }, { passive: true });
-
-        function endDrag(e) {
-            if (!isDragging) return;
-            isDragging = false;
-            cardContainer.style.cursor = 'grab';
-            
-            // Snap to the closest face
-            targetRotY = Math.round(targetRotY / 180) * 180;
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connectParticles();
         }
 
-        window.addEventListener('pointerup', endDrag);
-        window.addEventListener('pointercancel', endDrag);
-
-        function animateCard() {
-            currentRotY += (targetRotY - currentRotY) * 0.08;
-            // Only update rotation along the Y axis
-            card.style.transform = `rotateY(${currentRotY}deg)`;
-            requestAnimationFrame(animateCard);
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    if (distance < (bgCanvas.width/7) * (bgCanvas.height/7)) {
+                        const theme = htmlElement.getAttribute('data-theme');
+                        opacityValue = 1 - (distance / 15000);
+                        bgCtx.strokeStyle = theme === 'dark' ? `rgba(255, 255, 255, ${opacityValue * 0.2})` : `rgba(0, 0, 0, ${opacityValue * 0.2})`;
+                        bgCtx.lineWidth = 1;
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        bgCtx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        bgCtx.stroke();
+                    }
+                }
+            }
         }
-        animateCard(); 
+
+        initParticles();
+        animateParticles();
+
 
         // --- 3. SCROLL REVEAL & NAVBAR ANIMATIONS ---
         const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         revealElements.forEach(el => revealObserver.observe(el));
 
         const navbar = document.getElementById('navbar');
+        
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        });
+            const heroTrack = document.getElementById('hero-scroll-track');
+            const heroBottom = heroTrack.offsetTop + heroTrack.offsetHeight - window.innerHeight;
 
-        // --- 4. SCROLL DOWN ARROW LOGIC ---
-        const scrollArrow = document.getElementById('scroll-arrow');
-        if(scrollArrow) {
-            scrollArrow.addEventListener('click', () => {
-                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-            });
-        }
-
-        // --- 5. 3D ICOSAHEDRON BACKGROUND ---
-        const container = document.getElementById('webgl-container');
-        const scene = new THREE.Scene();
-        
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 25;
-        
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        const geometry = new THREE.IcosahedronGeometry(12, 1);
-        
-        const material = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff, metalness: 0.1, roughness: 0.5,
-            wireframe: true, transparent: true, opacity: 0.15
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-
-        const accentLight = new THREE.PointLight(0xADA47F, 2, 50); 
-        accentLight.position.set(10, 10, 10);
-        scene.add(accentLight);
-
-        const whiteLight = new THREE.PointLight(0xffffff, 1, 50);
-        whiteLight.position.set(-10, -10, -10);
-        scene.add(whiteLight);
-
-        function updateThreeJSColors(theme) {
-            if(theme === 'dark') {
-                material.color.setHex(0x45402C);
-                material.opacity = 0.3;
-                accentLight.color.setHex(0xADA47F);
-                accentLight.intensity = 4;
-            } else if(theme === 'light') {
-                material.color.setHex(0x86D5C0);
-                material.opacity = 0.25;
-                accentLight.color.setHex(0x369B80);
-                accentLight.intensity = 2;
-            } else if(theme === 'gray') {
-                material.color.setHex(0x666666); 
-                material.opacity = 0.25;
-                accentLight.color.setHex(0xffffff); 
-                accentLight.intensity = 3;
+            if(window.scrollY >= heroBottom){
+                navbar.classList.add('scrolled');
+            }else{
+                navbar.classList.remove('scrolled');
             }
-        }
-        updateThreeJSColors(themes[currentThemeIndex]);
-
-        const clock = new THREE.Clock();
-
-        function animateBg() {
-            requestAnimationFrame(animateBg);
-            const elapsedTime = clock.getElapsedTime();
-
-            mesh.rotation.x += 0.0015;
-            mesh.rotation.y += 0.0020;
-            mesh.position.y = Math.sin(elapsedTime * 0.5) * 1.2;
-            
-            const scrollY = window.scrollY;
-            camera.position.y = -(scrollY * 0.005);
-
-            renderer.render(scene, camera);
-        }
-        animateBg();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         });
+        
+        // --- 4. ZERO-FAIL CANVAS ANIMATION LOGIC (HERO) ---
+        const canvas = document.getElementById("hero-canvas");
+        const ctx = canvas.getContext("2d");
+        const scrollTrack = document.getElementById("hero-scroll-track");
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const frameCount = 520;
+        const images = [];
+
+        // Preload Image Sequence
+        for(let i=1; i<=frameCount; i++) {
+            const img = new Image();
+            img.src = `frames/frame_${String(i).padStart(5,"0")}.png`;
+            images.push(img);
+        }
+
+        // Draw image mimicking 'background-size: cover'
+        function drawImageCover(context, img) {
+            const canvasRatio = context.canvas.width / context.canvas.height;
+            const imgRatio = img.width / img.height;
+            let drawWidth, drawHeight, drawX, drawY;
+
+            if (canvasRatio > imgRatio) {
+                drawWidth = context.canvas.width;
+                drawHeight = context.canvas.width / imgRatio;
+                drawX = 0;
+                drawY = (context.canvas.height - drawHeight) / 2;
+            } else {
+                drawWidth = context.canvas.height * imgRatio;
+                drawHeight = context.canvas.height;
+                drawX = (context.canvas.width - drawWidth) / 2;
+                drawY = 0;
+            }
+            context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+        }
+
+        let currentScrollFrame = 0;
+        let targetScrollFrame = 0;
+
+        window.addEventListener('scroll', () => {
+            const rect = scrollTrack.getBoundingClientRect();
+            
+            if(rect.top <= 0) {
+                const maxScrollableDistance = rect.height - window.innerHeight;
+                let scrollFraction = Math.abs(rect.top) / maxScrollableDistance;
+                
+                scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+                
+                targetScrollFrame = scrollFraction * (frameCount - 1);
+            } else {
+                targetScrollFrame = 0;
+            }
+        });
+
+        let lastDrawnFrameIndex = -1; 
+
+        function renderCanvas() {
+            currentScrollFrame += (targetScrollFrame - currentScrollFrame) * 0.08;
+            
+            const frameIndex = Math.round(currentScrollFrame);
+
+            if(frameIndex !== lastDrawnFrameIndex && images[frameIndex] && images[frameIndex].complete) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                drawImageCover(ctx, images[frameIndex]);
+                lastDrawnFrameIndex = frameIndex;
+            }
+
+            requestAnimationFrame(renderCanvas);
+        }
+
+        // Initialize Hero Loop
+        renderCanvas();
     </script>
 </body>
 </html>
